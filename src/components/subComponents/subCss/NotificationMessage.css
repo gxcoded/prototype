@@ -1,0 +1,85 @@
+.notification-message-container {
+  position: relative;
+}
+.notification-message-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.notification-main-section {
+  display: flex;
+  min-height: 600px;
+  padding: 1em;
+  margin-top: 1em;
+  border-radius: 20px;
+  background: white;
+  box-shadow: var(--shadowColor);
+}
+.notification-main-section-left,
+.notification-main-section-right {
+  width: 50%;
+  display: flex;
+  padding: 2em;
+}
+.notification-main-section-left {
+  background: url("../../../assets/images/mobile.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.notification-main-section-right-content {
+  width: 100%;
+}
+.custom-msg-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.custom-msg-box {
+  min-height: 300px;
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 30px;
+
+  border: 1px solid var(--borderColor);
+  border-bottom-right-radius: 0;
+}
+.custom-text-area {
+  width: 100%;
+  border: none;
+  padding: 1em;
+  outline: none;
+}
+.preview-container {
+  padding: 1em;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+  margin-top: -100em;
+  transition: 1s ease;
+}
+.preview-display {
+  height: 90%;
+  width: 300px;
+  background: url("../../../assets/images/phone.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.phone-msg-display {
+  font-size: 0.6em;
+  width: 70%;
+  padding: 1.5em;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  box-shadow: var(--shadowColor);
+  background: rgb(245, 245, 245);
+}
+.hide-preview {
+  margin-top: 0;
+}

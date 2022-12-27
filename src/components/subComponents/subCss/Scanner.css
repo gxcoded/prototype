@@ -1,0 +1,102 @@
+.entrance-scan-container {
+  padding: 2em;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.entrance-scan-main {
+  width: 300px;
+  height: 400px;
+  /* padding: 1em; */
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: white;
+  box-shadow: var(--shadowColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.entrance-scanner-frame {
+  padding: 0 !important;
+}
+.entrance-scanner {
+  width: 400px;
+  height: 400px;
+  margin: 0;
+}
+.scanner-frame-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.scanner-frame-wrap i {
+  font-size: 5em;
+}
+/* =======Scanner Modal======== */
+.scan-location-display {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 1em 0;
+}
+.scanner-modal-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  transition: 1s ease;
+}
+.scanner-modal {
+  width: 310px;
+  height: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: var(--shadowColor);
+  padding: 1em;
+}
+.hide-scan-modal {
+  margin-top: -100em;
+}
+.scan-class {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.scan-class-in {
+  color: var(--blue);
+}
+.scan-class-out {
+  color: var(--red);
+}
+.scan-date {
+  font-weight: 600;
+}
+/* not allowed */
+
+.not-allowed-sign {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.not-allowed-icon {
+  font-size: 5em;
+  color: var(--red);
+}
+.not-allowed-text {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--red);
+}

@@ -1,0 +1,39 @@
+.preview-main{
+    min-height: 1500px;
+    background:white;
+    padding: 2em;
+}
+.preview-header,
+.preview-header-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.psu-img{
+    height: 100px;
+}
+.psu-header{
+    font-size: 1.3em;
+    font-weight: 500;
+}
+.psu-sub-header{
+    font-size: .8em;
+    font-weight: 500;
+}
+.preview-title{
+    text-align: center;
+    padding: 3em 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.attendance-subject{
+    display: flex;
+    font-size: .9em;
+}
+.attendance-details-text-title{
+    width: 100px;
+    font-weight: bold;
+}

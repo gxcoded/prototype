@@ -1,0 +1,23 @@
+.meeting-container,.student-list-container{
+    background: white;
+    padding: 1em;
+    font-size: 1.2em;
+    border-radius: 5px;
+    min-height: 200px;
+   
+}
+.meeting-log-table{
+    padding: 1em;
+    min-height:300px;
+}
+
+.add-student-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-list-table{
+    min-height: 200px;
+    padding: 2em 1em;
+}

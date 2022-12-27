@@ -1,0 +1,153 @@
+.subjects-container {
+  position: relative;
+  overflow: hidden;
+}
+.subjects-title {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+.subjects-main {
+  margin-top: 2em;
+  padding: 1em;
+  box-shadow: var(--shadowColor);
+  min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.subjects-main-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.left-col {
+  width: 40%;
+  display: flex;
+}
+.subject-cols {
+  width: 50%;
+  padding: 1em;
+  border-radius: 20px;
+}
+.subject-cols-main {
+  width: 60%;
+  padding: 1em;
+  border-radius: 20px;
+  overflow: auto;
+}
+.subjects-col-table {
+  min-width: 500px;
+  overflow: auto;
+}
+.subject-cols-title {
+  font-weight: 500;
+  padding: 0.5em 0;
+}
+.subject-cols ul {
+  border: 1px solid var(--borderColor);
+}
+
+.subject-cols-li {
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5em !important;
+}
+.subject-li-btn,
+.subject-li-btn-sec {
+  padding: 0.3em 1em;
+  margin: 0 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(128, 123, 123);
+}
+.active-academic,
+.active-level,
+.active-sem {
+  background: var(--blue);
+  color: white;
+}
+.sub-table-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-sub-btn {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--blue);
+}
+
+/* pop up */
+
+.subject-pop-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s ease;
+  margin-top: -80em;
+}
+.subject-pop-box {
+  width: 300px;
+  height: 250px;
+  padding: 1em;
+  background: white;
+  box-shadow: var(--shadowColor);
+  border-radius: 20px;
+}
+.sub-pop-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 0.5em 0;
+}
+.pop-show {
+  margin-top: 0;
+}
+@media (max-width: 1155px) {
+  .left-col {
+    flex-direction: column;
+  }
+  .subject-cols {
+    width: 70%;
+  }
+}
+@media (max-width: 790px) {
+  .left-col {
+    width: 30%;
+  }
+  .subject-cols {
+    width: 100%;
+  }
+  .subject-cols-main {
+    width: 70%;
+  }
+}
+@media (max-width: 740px) {
+  .subjects-main-content {
+    flex-direction: column;
+  }
+  .left-col {
+    flex-direction: row;
+    width: 100%;
+  }
+  .subject-cols {
+    width: 50%;
+  }
+  .subject-cols-main {
+    width: 100%;
+  }
+}
+
+@media (max-width: 740px) {
+  .subjects-main-content {
+    font-size: 0.7rem;
+  }
+  .subjects-col-table table {
+    font-size: 0.8rem;
+  }
+}

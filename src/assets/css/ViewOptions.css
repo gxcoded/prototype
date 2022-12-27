@@ -1,0 +1,36 @@
+.wrapper{
+    height:100vh;
+    background: url('../images/hero.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.view-options{
+    text-align: center;
+    min-height: 500px;
+    max-width: 800px;
+}
+.view-options-image{
+    height: 300px;
+   
+    background:url('../images/illustration.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:top;
+}
+.view-options-text{
+    font-size: 2.5em;
+    color:var(--teal);
+}
+.options-btn{
+    border-radius: 5px !important;
+    padding:2em;
+}
+.option{
+   height:100px;
+   width:200px;
+   border-radius: 20px;
+   background: var(--teal);
+}

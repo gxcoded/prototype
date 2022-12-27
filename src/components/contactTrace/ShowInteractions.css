@@ -1,0 +1,100 @@
+.show-interactions-header {
+  padding: 1em 0;
+}
+.show-interactions-main-top {
+  display: flex;
+  align-items: center;
+}
+.s-i-m-profile {
+  display: flex;
+  padding: 2em;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: var(--shadowColorLight);
+  height: 150px;
+}
+.s-i-m-profile-info {
+  margin: 0 1em;
+}
+.s-i-m-profile-name {
+  font-weight: 600;
+  margin: 0 1em;
+}
+.s-i-m-date {
+  height: 150px;
+  width: 250px;
+  border-radius: 20px;
+  margin: 0 1em;
+  box-shadow: var(--shadowColorLight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.s-i-m-date-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.s-i-m-date-content i {
+  font-size: 3em;
+  margin-bottom: 0.1em;
+  color: var(--red);
+}
+.s-i-m-date-content span {
+  font-weight: 500;
+}
+.s-i-m-table {
+  padding: 2em;
+  margin-top: 1em;
+  border-radius: 20px;
+  min-height: 200px;
+  box-shadow: var(--shadowColorLight);
+}
+.rooms-visited-list {
+  padding: 1em;
+  margin: 0.5em 0;
+  background: rgb(255, 251, 251);
+  border-radius: 5px;
+}
+.room-visited-name {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.room-visited-name i {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--red);
+}
+.rooms-visited-duration {
+  display: flex;
+  width: 300px;
+  padding: 1em;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--borderColor);
+}
+.duration-labels,
+.duration-data {
+  width: 50%;
+}
+.duration-data {
+  font-weight: 500;
+}
+.interactions-results {
+  margin-top: 1em;
+  padding: 1em;
+}
+.interaction-results-title {
+  padding: 0.5rem 0;
+  font-weight: 500;
+}
+.interaction-list {
+  padding: 0.5rem;
+}
+.interaction-time-duration {
+  padding: 0.5em 1em;
+  font-weight: 600;
+}
+.minutes {
+  margin: 0 0.2rem;
+}

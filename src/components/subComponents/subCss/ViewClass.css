@@ -1,0 +1,32 @@
+.view-class-title{
+    display: flex;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.title-img{
+    height: 80px;
+    margin-right: 1em;
+}
+.view-class-title-text{
+   font-size: 1.2em;
+   font-weight: bold;
+}
+.view-class-nav{
+    display: flex;
+}
+.view-class-nav-link{
+    cursor: pointer;
+    margin: 1em;
+    font-weight: 500;
+    font-size: .9em;
+}
+.view-class-nav-link:hover, .nav-link-active{
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+.view-class-main-board{
+    margin-top: 1em;
+    min-height: 400px;
+    padding: 0 1em;
+    
+}

@@ -1,0 +1,119 @@
+.movement-container {
+  padding: 2em;
+}
+.movement-main {
+  min-height: 80vh;
+  display: flex;
+  background: white;
+  border-radius: 20px;
+  padding: 1em;
+  position: relative;
+  overflow: auto;
+}
+.movement-main-left {
+  width: 30%;
+  padding: 1em 2em;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.movement-main-right {
+  width: 70%;
+  padding: 1em;
+  height: 700px;
+  overflow: auto;
+}
+.mml-content-img {
+  width: 100%;
+}
+.mml-content-text {
+  padding: 1em;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1em;
+  border-radius: 20px;
+  box-shadow: var(--shadowColorLight);
+  background: rgb(252, 252, 252);
+}
+.mmr-header {
+  padding: 0.5em 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.travel-grid {
+  background: var(--teal);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: var(--shadowColorLight);
+}
+.travel-box {
+  background: var(--blue);
+  color: white;
+}
+.travel-box:hover {
+  background: var(--red);
+}
+.movement-logs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  border-radius: 20px;
+  transition: 1s ease;
+  display: flex;
+  justify-content: center;
+  padding: 2em 0;
+}
+.hide-movement-logs {
+  margin-top: -200em;
+}
+.movement-log-box {
+  background: white;
+  max-height: 600px;
+  width: 400px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: var(--shadowColorLight);
+}
+.mlb-header {
+  padding: 1em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--blue);
+  color: white;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mlb-list {
+  padding: 1em;
+  height: 450px;
+  overflow: auto;
+}
+@media (max-width: 1100px) {
+  .movement-main {
+    flex-direction: column;
+  }
+  .movement-main-left {
+    display: none;
+    width: 100%;
+  }
+  .movement-main-right {
+    width: 100%;
+    height: 500px;
+  }
+}
+@media (max-width: 460px) {
+  .travel-box {
+    width: 100%;
+  }
+}
+@media (max-width: 400px) {
+  .movement-container {
+    padding: 0.5em;
+  }
+}

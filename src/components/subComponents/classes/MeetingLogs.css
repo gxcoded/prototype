@@ -1,0 +1,17 @@
+.view-record-btn {
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+}
+.eye-btn {
+  color: var(--blue);
+  border-radius: 5px;
+  padding: 0.1em 1em;
+}
+.meeting-logs-container {
+  overflow: auto;
+}
+.meeting-logs-table-list {
+  min-width: 800px;
+  overflow: auto;
+}

@@ -1,0 +1,74 @@
+.class-meeting-container {
+  min-height: 500px;
+}
+
+/* ==============Meeting Logs================== */
+.new-meeting-container {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+}
+.new-meeting-left {
+  width: 30%;
+  overflow: auto;
+}
+.new-meeting-right {
+  width: 70%;
+  padding: 1em;
+  overflow: auto;
+}
+.hide-right {
+  overflow: hidden !important;
+  width: 0%;
+}
+.meeting-room-options {
+  min-width: 32 0px;
+  overflow: auto;
+}
+.current-meeting-log-table {
+  min-width: 500px;
+  overflow: auto;
+}
+.meeting-room-options {
+  padding: 1em;
+  border-radius: 5px;
+}
+.meeting-room-header {
+  font-weight: 600;
+}
+.new-meeting-logs-right-header {
+  font-weight: 500;
+  padding: 0.5em;
+  background: var(--blue);
+  color: white;
+}
+.new-meeting-no-logs {
+  max-width: 500px !important;
+}
+.new-meeting-logs-right-header {
+  min-width: 500px;
+}
+/* ==============Meeting Logs Table================== */
+
+.meeting-logs-container {
+  padding: 0 1em;
+}
+
+@media (max-width: 1170px) {
+  .new-meeting-container {
+    flex-direction: column;
+  }
+  .new-meeting-left,
+  .new-meeting-right {
+    width: 100%;
+    margin-top: 1em;
+  }
+}
+@media (max-width: 500px) {
+  .class-students-title {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+}

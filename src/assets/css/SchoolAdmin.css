@@ -1,0 +1,64 @@
+.sub-name-title {
+  font-size: 0.7em !important;
+  font-weight: 500;
+}
+.school-admin-container {
+  position: relative;
+}
+.collapsible {
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.collapsible:hover {
+  background: rgb(243, 240, 240);
+}
+.ct-nav-btn {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+.notification-counter {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  box-shadow: var(--shadowColor);
+}
+.sa-right-top {
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.notification-link {
+  cursor: pointer;
+}
+.notification-link:hover {
+  color: var(--blue);
+}
+.bold-notif {
+  font-weight: bold;
+  color: var(--red);
+}
+
+.s-admin-right {
+  position: relative;
+}
+.chat-count-display {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: var(--red) !important;
+  color: var(--red) !important;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

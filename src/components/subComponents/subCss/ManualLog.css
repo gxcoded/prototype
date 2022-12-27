@@ -1,0 +1,27 @@
+.manual-log-title{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.manual-log-main{
+    min-height: 200px;
+    border-radius: 20px;
+    background:white;
+    margin-top: 1em;
+    box-shadow: var(--shadowColor);
+    padding:2em;
+}
+.manual-log-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.manual-log-table{
+    min-height: 400px;
+    padding: 2em;
+    margin-top: 1em;
+    border-radius: 20px;
+    background:white;
+    box-shadow: var(--shadowColor);
+}

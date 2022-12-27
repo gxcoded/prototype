@@ -1,0 +1,144 @@
+.walk-in-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.walk-in-form {
+  border-radius: 20px;
+  padding: 2em 1em;
+  box-shadow: var(--shadowColorLight);
+  width: 55%;
+
+  overflow: auto;
+}
+
+.walk-in-preview-img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: var(--shadowColor);
+}
+.walk-in-form-top {
+  width: 100%;
+  display: flex;
+}
+.walk-in-form-top-left,
+.walk-in-form-top-right {
+  width: 50%;
+}
+.walk-in-form-top-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.walk-in-form-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.walk-in-logs {
+  width: 43%;
+
+  padding: 0 1em;
+  border-radius: 20px;
+}
+.walk-in-logs-header {
+  padding-bottom: 1em;
+  font-weight: 600;
+  color: var(--blue);
+}
+.walk-in-logs-content {
+  max-height: 400px;
+  overflow: auto;
+}
+.recent-logs-table {
+  font-size: 0.8em;
+}
+.recent-logs-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: var(--shadowColor);
+}
+.walkIn-form {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--borderColor);
+}
+.recent-log-card {
+  width: 100%;
+}
+/* =========Image Capture========== */
+
+.capture-image-pop {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(5px);
+}
+.capture-image-box {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.close-image-capture {
+  cursor: pointer;
+  padding: 0.5em;
+
+  color: white;
+}
+.image-capture-frame {
+  width: 350px;
+  padding: 1em;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  background: black;
+}
+.capture-cam {
+  position: absolute;
+  top: 10;
+  left: 0;
+}
+@media (max-width: 1400px) {
+  .walk-in-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 10em;
+  }
+  .walk-in-form,
+  .walk-in-logs {
+    width: 100%;
+    margin-bottom: 2em;
+  }
+}
+@media (max-width: 1120px) {
+  .walk-in-container {
+    padding: 1em 5em;
+  }
+}
+@media (max-width: 800px) {
+  .walk-in-container {
+    padding: 1em;
+  }
+  .walk-in-form-top {
+    flex-direction: column;
+  }
+  .walk-in-form-top-left,
+  .walk-in-form-top-right {
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .walk-in-container {
+    padding: 0em;
+  }
+}

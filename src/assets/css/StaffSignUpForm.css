@@ -1,0 +1,101 @@
+.staff-form{
+    min-height: 500px;
+    max-width: 1000px;
+    border-radius: 5px;
+    background: white;
+    padding: 1em;
+    overflow: hidden;
+    box-shadow: var(--shadowColor);
+}
+.campus-form-title{
+    font-weight: 500;
+    font-size: 1.5em;
+    color: var(--blue);
+    padding: 1em 0;
+}
+.signUp-form-title{
+    font-size: 1.3em;
+    border-bottom:1px solid var(--borderColor);
+    padding-bottom: 1em;
+
+    color: var(--blue);
+}
+.image-preview{
+    height: 250px;
+    width: 250px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: var(--shadowColor);
+}
+
+.form-inline-right,
+.form-inline-left{
+   
+    width: 50%;
+}
+.form-inline-left{
+   
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.form-lower{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+@media(max-width: 1050px){
+  .form-inline{
+     flex-direction: column;
+   
+  }
+  .staff-form{
+   
+    min-width: 700px;
+   
+}
+.form-inline-left,
+.form-inline-right{
+    width: 100%;
+   
+ }
+ .show{
+    width: 50%;
+}
+}
+@media(max-width: 750px){
+    .image-preview{
+        height: 150px;
+        width: 150px;
+      
+    }
+    .staff-form{
+   
+        min-width: 500px;
+       
+    }
+    .show{
+        width: 80%;
+    }
+
+}
+@media(max-width: 540px){
+ 
+    .staff-form{
+   
+        min-width: 400px;
+       
+    }
+
+}
+@media(max-width: 450px){
+ 
+    .staff-form{
+   
+        min-width: 340px;
+       
+    }
+
+}

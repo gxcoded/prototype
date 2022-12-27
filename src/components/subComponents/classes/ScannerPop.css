@@ -1,0 +1,87 @@
+.scanner-pop-container {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+}
+.scanner-pop-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.scanner-pop {
+  position: relative;
+  width: 350px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.attendance-reader {
+  position: absolute;
+  top: 0;
+  margin-top: -1em;
+  width: 140%;
+}
+.scanner-result-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+}
+.scanner-result-display-card {
+  width: 300px;
+  height: 400px;
+  background: white;
+}
+.att-res-card {
+  height: 430px;
+}
+.scan-res-buttons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.manual-frame-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadowColor);
+  overflow: hidden;
+}
+.toggle-scan {
+  padding: 2em 1em;
+  text-align: center;
+  font-size: 0.9em;
+}
+.toggle-scan-text:hover {
+  color: var(--blue);
+  cursor: pointer;
+}
+.hide-scanner-text {
+  text-align: center;
+  padding: 0.5em;
+  cursor: pointer;
+  background: var(--red);
+  border-radius: 5px;
+  color: white;
+  width: 350px;
+  margin-bottom: 1em;
+  font-size: 0.8em;
+}
+.not-found-try-again {
+  margin-top: 1em;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.8em;
+}
+.not-found-try-again:hover {
+  color: var(--blue);
+}

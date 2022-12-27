@@ -1,0 +1,47 @@
+.school-admin-account-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.school-admin-account-main {
+  margin-top: 1em;
+  padding: 2em;
+}
+
+.personal-profile-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+.personal-profile-main {
+  min-height: 200px;
+  padding: 2em;
+  margin-top: 1em;
+  display: flex;
+
+  border-radius: 20px;
+}
+.personal-profile-main-left,
+.personal-profile-main-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.personal-profile-main-right {
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .personal-profile-title {
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+  .personal-profile-main {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .personal-profile-main-right {
+    margin-top: 5em;
+  }
+}

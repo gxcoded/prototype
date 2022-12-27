@@ -1,0 +1,57 @@
+.meeting-details {
+  background: rgb(255, 252, 252);
+  padding: 1em;
+  display: flex;
+  align-items: center;
+}
+.meeting-details-left {
+  width: 70%;
+}
+.meeting-details-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 30%;
+}
+.meeting-details-right > div {
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-right: 1em;
+  padding: 0.2em;
+  transition: 0.5s ease;
+  font-weight: bold;
+  color: var(--blue);
+}
+.meeting-details-title {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+.meeting-details-date,
+.meeting-details-start {
+  padding: 0 0.5em;
+  font-weight: 600;
+}
+.attendance-log-list {
+  overflow: hidden;
+}
+.meeting-logs-table-section {
+  overflow: auto;
+}
+.attendance-category {
+  padding: 1em;
+
+  font-weight: 500;
+  margin-top: 1em;
+  font-weight: 500;
+}
+.meeting-logs-table {
+  min-width: 600px;
+  overflow: auto;
+}
+@media (max-width: 600px) {
+  .meeting-details-left {
+    font-size: 0.8rem;
+    width: 100%;
+  }
+}

@@ -1,0 +1,40 @@
+.log-list-container{
+    min-height: 200px;
+    margin-top: 2em;
+}
+.log-list-title{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.log-cards{
+    height: 100%;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.log-card{
+    padding: 1em;
+    margin: .5em;
+    height: 300px;
+    width: 250px;
+    background:white;
+    border-radius: 20px;
+    box-shadow: var(--shadowColor);
+    overflow: hidden;
+}
+.log-card-image{
+    text-align: center;
+}
+.log-card-info{
+    text-align: center;
+    padding: 1em 0;
+    font-weight: 600;
+}
+.log-card-info-room{
+   font-size: 1.5em;
+}
+.log-card-info-date{
+    font-weight: 500;
+   font-size: .8em;
+}

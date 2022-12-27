@@ -1,0 +1,167 @@
+.trace-all-container {
+  position: relative;
+}
+
+.trace-all-header {
+  padding: 1em 0;
+}
+.back-span {
+  cursor: pointer;
+  font-weight: 600;
+}
+.trace-all-header {
+  border-bottom: 1px solid var(--borderColor);
+}
+.trace-all-img {
+  height: 70px;
+  width: 70px;
+}
+.trace-all-main {
+  border-radius: 10px;
+  padding: 1em;
+  margin: 1em 0;
+  min-height: 200px;
+  box-shadow: var(--shadowColorLight);
+  background: white;
+}
+.trace-all-main-header {
+  display: flex;
+  font-size: 0.9rem;
+  margin: 1em 0;
+}
+.s-i-m-profile-status {
+  font-size: 0.8rem;
+}
+.s-i-m-profile-status-label {
+  padding: 0.2em;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+.s-i-m-profile-status-label:hover {
+  background: var(--teal);
+  color: white;
+}
+.trace-all-main-date,
+.trace-all-main-profile {
+  padding: 1em;
+}
+.trace-all-main-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.trace-all-starting-date {
+  font-weight: 600;
+  padding: 0.5em 0;
+}
+/* =======Map View Start========= */
+.trace-all-map-view {
+  position: absolute;
+  left: 0;
+  margin-top: 5em;
+  width: 100%;
+  height: 600px;
+  background: #333;
+  display: flex;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: var(--shadowColorLight);
+}
+.trace-all-map-view-left {
+  width: 25%;
+  padding: 1em;
+  color: white;
+}
+.trace-all-map-view-right {
+  width: 75%;
+  background: white;
+}
+.map-view-closer {
+  cursor: pointer;
+}
+.trace-all-info-dates {
+  padding: 1em;
+  display: flex;
+}
+.trace-all-info-dates-right {
+  margin-left: 1em;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 500;
+  background: var(--blue);
+  border-radius: 10px;
+  box-shadow: var(--shadowColorLight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.trace-all-date-guide {
+  padding: 1em;
+}
+.trace-all-map-info-header {
+  margin-top: 0.5em;
+  padding: 1em;
+  text-align: center;
+  background: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: var(--shadowColorLight);
+  font-weight: 600;
+}
+.trace-all-map-info-list {
+  height: 400px;
+  overflow: auto;
+  margin-top: 1em;
+  padding: 0.5em;
+  font-size: 0.8em;
+}
+.trace-all-map-info-list-card {
+  padding: 0.5em;
+  background: var(--blue);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0.2em 0;
+}
+/* =======Map View End========= */
+.tam-restrict,
+.tam-report {
+  transition: 0.5s ease;
+  margin: 0 1em;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.tam-restrict:hover,
+.tam-report:hover {
+  color: var(--blue);
+}
+.tam-restrict i,
+.tam-report i {
+  color: var(--blue);
+}
+.trace-all-main-content {
+  margin: 1em 0;
+}
+.dates-header {
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+.fragment-wrap {
+  padding: 1em;
+}
+.all-rooms-visited-section {
+  padding: 1em;
+}
+.visited-room-details {
+  margin-bottom: 1em;
+}
+.vrd-header {
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  background: var(--teal);
+  color: white;
+}

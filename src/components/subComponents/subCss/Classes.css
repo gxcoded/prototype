@@ -1,0 +1,203 @@
+.classes-container {
+  position: relative;
+  min-height: 70vh;
+}
+
+.classes-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.classes-main {
+  display: flex;
+  padding: 1em;
+}
+.classes-controls {
+  width: 20%;
+}
+.classes-display {
+  padding: 0 3em;
+  width: 100%;
+}
+.selected-academic,
+.selected-semester {
+  background: var(--blue);
+  color: white;
+}
+.sub-top {
+  margin-top: 1em;
+}
+.class-cols {
+  padding: 0 1em;
+  border-radius: 20px;
+}
+.class-cols ul {
+  border: 1px solid var(--borderColor);
+}
+.classes-display-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+.classes-display-title {
+  font-weight: 500;
+  cursor: pointer;
+}
+.classes-display-body {
+  display: flex;
+  flex-wrap: wrap;
+}
+.class-list-card {
+  border: 1px solid var(--borderColor);
+  margin: 1em;
+  height: 220px;
+  width: 220px;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: var(--shadowColorLight);
+}
+.class-list-card:hover .hide-class-btn {
+  display: block;
+}
+
+.create-new-class {
+  border: 1px dashed var(--blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue);
+}
+.class-render {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  position: relative;
+  background: rgb(254, 253, 253);
+}
+.class-render-name {
+  font-size: 1.3em;
+}
+.class-render-course {
+  font-weight: 500;
+  font-size: 0.7em;
+}
+
+.class-render-img {
+  padding: 0.5em;
+  height: 80px;
+}
+.hide-class-btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 0.2em;
+  text-align: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: 1s ease;
+}
+.class-card-details {
+  text-align: center;
+  cursor: pointer;
+}
+.class-card-details:hover .class-list-card {
+  box-shadow: var(--shadowColor);
+}
+/* =========Pop UP=========== */
+.add-class-pop-container {
+  position: absolute;
+  max-height: 700px;
+  height: 100%;
+  min-width: 400px;
+  width: 100%;
+  backdrop-filter: blur(1px);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  transition: 1s ease;
+  margin-top: -200em;
+}
+.add-class-pop-form {
+  border-radius: 5px;
+  background: white;
+  height: 650px;
+  width: 400px;
+  box-shadow: var(--shadowColor);
+  overflow: hidden;
+}
+.add-class-form-title {
+  padding: 0.3em 0;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.show-pop-class {
+  margin-top: 0;
+}
+.add-pop-up-body {
+  width: 800px;
+  display: flex;
+  transition: 1s ease;
+  margin-left: 0px;
+}
+.first-section,
+.second-section {
+  position: relative;
+  width: 50%;
+  padding: 1em;
+}
+.second-section-label {
+  padding: 1em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+.class-icon-options {
+  height: 100%;
+}
+.second-section-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.second-section-card {
+  border-radius: 5px;
+  padding: 0.5em;
+  cursor: pointer;
+  margin: 0.5em;
+  height: 100px;
+  width: 100px;
+}
+.second-section-card:hover {
+  box-shadow: var(--shadowColor);
+}
+.icons-view {
+  margin-left: -400px;
+}
+.back-arrow i {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--blue);
+}
+.form-closer {
+  cursor: pointer;
+  color: var(--red);
+  font-size: 1.2rem;
+  padding: 0.5em 0;
+  position: absolute;
+  text-align: right;
+  top: 0;
+}
+@media (max-width: 500px) {
+  .classes-display {
+    padding: 0 1em;
+  }
+  .classes-display-body {
+    justify-content: center;
+  }
+}

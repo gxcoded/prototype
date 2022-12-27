@@ -1,0 +1,103 @@
+.attendance-container {
+  position: relative;
+  overflow: auto;
+}
+
+.attendance-header,
+.attendance-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.attendance-header-title {
+  font-weight: 600;
+}
+.attendance-records-main {
+  font-size: 0.8em;
+  display: flex;
+  min-width: 1000px;
+  overflow: auto;
+}
+.attendance-records-main-left {
+  width: 20%;
+}
+.attendance-records-main-right {
+  width: 80%;
+}
+.record-table-header {
+  padding: 0 1em;
+  height: 60px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: var(--blue);
+  font-style: italic;
+  color: white;
+}
+.student-list-row {
+  text-transform: uppercase;
+  padding: 0 1em;
+  font-weight: 600;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.custom-table-list-row {
+  border: 1px solid var(--borderColor);
+  border-top: none;
+}
+
+.attendance-records-dates {
+  display: flex;
+  align-items: center;
+}
+.record-dates-column {
+  font-size: 0.8em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  background: var(--blue);
+  font-style: italic;
+  color: white;
+  width: 220px;
+  height: 60px;
+}
+.present,
+.excused,
+.absent {
+  font-size: 1.2em;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--teal);
+  color: white;
+}
+.absent {
+  background: var(--red);
+}
+.excused {
+  background: var(--yellow);
+  color: black;
+}
+.no-meetings-found {
+  background: rgb(244, 244, 244);
+  font-size: 1.2em;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  padding: 1em;
+}
+.attendance-print-options {
+  padding: 1em 0;
+  margin-top: 2em;
+}

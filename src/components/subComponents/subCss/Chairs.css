@@ -1,0 +1,73 @@
+.chairs-container {
+  position: relative;
+}
+
+.assign-pop-up {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(1px);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+.assign-dialog-box {
+  height: 500px;
+  width: 500px;
+  background: white;
+  box-shadow: var(--shadowColor);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.assign-search-result {
+  height: 300px;
+  overflow: auto;
+  padding: 1em 0;
+  padding-bottom: 2em;
+}
+
+.assign-res-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: var(--shadowColor);
+}
+.assign-dialog-box-header {
+  padding: 0.1em 0.5em;
+  font-size: 1.5em;
+  text-align: right;
+}
+.assign-dialog-box-body {
+  padding: 1em 2em;
+}
+.assign-dialog-box-body h5 {
+  padding: 0.2em 0.5em;
+  font-size: 1.2em;
+  text-align: center;
+}
+.assign-dialog-box-header i {
+  cursor: pointer;
+}
+.chair-header {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.unassign-chair {
+  cursor: pointer;
+  color: var(--red);
+  margin-left: 1em;
+  font-weight: bold;
+}
+.assign-chair {
+  cursor: pointer;
+  color: var(--blue);
+}
+.assign-choosen {
+  cursor: pointer;
+}
+.assign-choosen .td {
+  padding-top: 2em;
+}

@@ -1,0 +1,107 @@
+.sign-up-links-container {
+  position: relative;
+}
+.send-sign-up-links-board {
+  padding: 2em 0;
+  margin-top: 1em;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.send-link-options {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.email-link-label {
+  font-size: 1em;
+  font-weight: 500;
+}
+.drag-drop-form {
+  padding: 2em;
+  border-radius: 20px;
+}
+.single-email {
+  width: 300px;
+  height: 300px;
+}
+.single-email-header {
+  font-weight: 500;
+}
+.drop-box {
+  font-weight: 500;
+  width: 400px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1em;
+  border: 2px dashed var(--borderColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.csv-icon {
+  font-size: 3em;
+}
+
+.highlight {
+  box-shadow: var(--shadowColor);
+  background: white !important;
+}
+.table-email-list-container {
+  margin-top: 1em;
+  min-height: 200px;
+  border-radius: 20px;
+  padding: 2em;
+}
+.email-table-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.email-table-list-title {
+  font-weight: bold;
+}
+/* =========Pop Up================ */
+
+.sign-up-links-pop-up {
+  position: absolute;
+  width: 100%;
+  height: 80vh;
+  backdrop-filter: blur(1px);
+  display: flex;
+  justify-content: center;
+  transition: 1s ease;
+}
+.hide-this {
+  margin-top: -100em;
+}
+.email-list-container {
+  height: 550px;
+  width: 700px;
+  background: white;
+  font-size: 0.7em;
+}
+.email-list-header {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--borderColor);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.email-list-body {
+  height: 400px;
+  overflow: auto;
+  padding: 1em;
+}
+.list-label {
+  font-weight: bold !important;
+}

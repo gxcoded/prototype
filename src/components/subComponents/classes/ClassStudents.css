@@ -1,0 +1,39 @@
+.class-students-container {
+  padding: 0 1em;
+}
+.class-students-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+.class-students-title {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.chosen {
+  background: var(--red);
+  color: white;
+}
+.class-student-header-search {
+  min-width: 400px;
+}
+.class-students-body {
+  overflow: auto;
+}
+/* ============AddNewStudent Component============= */
+.class-student-header-part {
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.class-student-header-title {
+  width: 30%;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .class-student-header-title {
+    display: none;
+  }
+}

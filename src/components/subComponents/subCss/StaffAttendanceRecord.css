@@ -1,0 +1,108 @@
+.attendance-record-title{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.staff-attendance-record-main{
+    margin-top: 1em;
+   
+}
+.attendance-options{
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attendance-option-left,
+.attendance-option-right{
+    width: 50%;
+    height: 100%;
+   
+}
+.attendance-option-right{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    padding: 0 2em;
+}
+.attendance-option-left{
+    padding: 1em;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    background:white;
+    border-left: 5px solid var(--blue);
+}
+.count-card{
+    height: 200px;
+    width: 300px;
+    border-radius: 20px;
+    background:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-left: 5px solid var(--blue);
+}
+.count-card-counter{
+    font-size: 3em;
+    font-weight: 400;
+    color: var(--blue);
+}
+.count-card-label{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+/* .input-group{
+   width: 100%;
+
+} */
+.form-control-select{
+    border:1px solid var(--borderColor) !important;
+    padding:.5em !important;
+    border-radius: 5px;
+   
+  
+}
+.input-label{
+    font-size: .8em;
+    font-weight: bold;
+}
+.attendance-table{
+    overflow: auto;
+    padding: 1em;
+    margin-top: 1em;
+    min-height: 300px;
+    background:white;
+    border-radius: 20px;
+  
+    
+}
+.controls{
+    cursor: pointer;
+}
+.campus-table-list{
+    min-width: 900px;
+}
+
+@media(max-width:550px){
+    .attendance-options{
+       flex-direction: column-reverse;
+    }
+    
+    .attendance-option-left,
+    .attendance-option-right{
+       width: 100%;
+       
+    }
+    .attendance-option-right{
+       padding: 0;
+    }
+    .count-card{
+       width: 100%;
+       margin-bottom: 1em;
+    }
+}

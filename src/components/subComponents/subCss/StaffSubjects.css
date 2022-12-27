@@ -1,0 +1,155 @@
+.staff-subject-title{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.subject-header{
+    display: flex;
+    justify-content: space-between;
+}
+.btn-sm{
+    cursor: pointer;
+    border-radius: 10px !important;
+    padding:.6em 1em;
+}
+.staff-subject-form{
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.staff-form-counter{
+    width: 25%;
+    height: 200px;
+    background:white;
+    border-radius: 20px;
+    border-left: 5px solid var(--blue);
+}
+.staff-form-fields{
+    padding: 4em 1em;
+    width: 100%;
+    min-height: 200px;
+    background:white;
+    box-shadow: var(--shadowColor);
+    border-radius: 20px;
+    
+}
+.listed-sections{
+    padding: 1em !important;
+    background: blue !important;
+}
+.form-field-title{
+    font-size: .9em;
+    font-weight: 600;
+}
+.subject-form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.sub-field{
+    border:1px solid var(--borderColor) !important;
+    border-radius: 5px !important;
+}
+.check-boxes{
+    padding:0 1.5em;
+    
+    align-items: center;
+}
+.form-check-input{
+    border: 1px solid var(--borderColor) !important;
+}
+.form-check{
+  
+    width: 70px !important;
+}
+
+.check-box-label,.form-check-label{
+    font-weight: bold;
+    font-size: .8em;
+}
+.subjects-table{
+    min-width: 900px;
+}
+.staff-subject-table{
+    padding: 1em;
+    min-height: 500px;
+    margin-top: 1em;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadowColor);
+    overflow: auto;
+}
+.saveBtn{
+  padding-right: 1em;
+  display: flex;
+  justify-content:space-between;
+  align-items: flex-end;
+}
+
+.selected-item-list{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: .8em;
+}
+.section-listed{
+    padding: .2em 1em;
+    border-radius: 10px;
+    margin-right: .5em;
+}
+.delete-listed{
+    cursor: pointer;
+    color: var(--red);
+}
+
+/* ==========class tab================= */
+
+.staff-class-grid{
+    min-height:200px;
+    display: flex;
+    flex-wrap: wrap
+   
+}
+
+.class-card{
+    width: 260px;
+    height: 280px;
+    background:white;
+    margin: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+  
+}
+.class-card:hover{
+    box-shadow: var(--shadowColor);
+  
+}
+.class-card-body{
+    height: 100%;
+}
+
+.class-img{
+    height: 100%;
+}
+.class-icon{
+    text-align: center;
+    padding: 1em;
+    height:70%;
+}
+.class-card-title{
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.class-card-sub-title{
+    font-size: .8em;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+.staff-class-grid-title{
+    padding: 1em;
+    font-weight: bold;
+    margin-top: 2em;
+}

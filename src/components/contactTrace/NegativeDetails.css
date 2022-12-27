@@ -1,0 +1,22 @@
+.negative-proof-section-left {
+  padding: 1em;
+  background: white;
+}
+
+.negative-proof-left,
+.negative-proof-right {
+  width: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+}
+.negative-proof-right {
+  justify-content: flex-start;
+}
+.negative-proof-right-details {
+  background: unset;
+  box-shadow: unset;
+
+  color: unset;
+  min-width: 300px;
+}

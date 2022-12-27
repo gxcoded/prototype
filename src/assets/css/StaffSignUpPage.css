@@ -1,0 +1,12 @@
+.staff-sign-up-page-container{
+    padding: 5em;
+    overflow: auto;
+    min-height:100vh;
+    background: url('../images/hero.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

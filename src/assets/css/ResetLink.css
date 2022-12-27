@@ -1,0 +1,35 @@
+.reset-link-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/hero.png");
+}
+
+.reset-link-main {
+  min-height: 400px;
+  min-width: 800px;
+
+  border-radius: 20px;
+  box-shadow: var(--shadowColor);
+  display: flex;
+  padding: 1em;
+}
+.reset-link-main-left,
+.reset-link-main-right {
+  width: 50%;
+  padding: 2em;
+}
+.reset-link-main-right {
+  background: url("../images/Password.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.reset-link-main-left-header {
+  font-size: 3em;
+  font-weight: 500;
+}
+.reset-link-main-left-sub-header {
+  font-weight: 500;
+}

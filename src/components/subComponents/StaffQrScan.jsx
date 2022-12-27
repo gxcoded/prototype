@@ -1,0 +1,264 @@
+import './subCss/QrScanner.css'
+import { QrReader } from 'react-qr-reader';
+import { useState } from 'react';
+import axios from 'axios'
+import swal from 'sweetalert';
+
+const StaffQrScan = () => {
+    const [attendance, setAttendance] = useState([]);
+    const [scan, setScan] = useState(false);
+    const [details, setDetails] = useState({});
+    const [room,setRoom] = useState('')
+    //    const [out,setOut] = useState(false)
+
+    const handleError = (error) => {
+        console.log(error)
+    }
+
+    const handleScan = (result) => {
+        console.log(result)
+    }
+
+    const showResult = (hash) => {
+        console.log(hash)
+        if (hash) {
+            const request = async () => {
+                const data = await makeRequest(hash);
+
+                setDetails(data)
+
+
+            }
+            request()
+
+        }
+    }
+
+    const makeRequest = async (hash) => {
+        const response = await axios.get(`http://localhost:5000/api/user?hash=${hash}`);
+        const data = await response.data;
+
+        return data;
+    }
+
+    const saveScan = () => {
+        if(room){
+            swal("Added!", "Scan Saved!", "success").then(res => {
+                setAttendance([...attendance, details])
+                setDetails({})
+            });
+
+        }else{
+            swal('Please Select a Room!')
+        }
+    }
+    const cancelScan = () => {
+        setDetails({})
+    }
+
+    const removeList = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "You can not undo this.",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    setAttendance(attendance.filter(list => list.id !== id))
+                    swal("Deleted!", {
+                        icon: "success",
+                    });
+                }
+            });
+    }
+    const saveData = () => {
+        swal("Saved!", "Attendance Saved!", "success").then(res => {
+            setAttendance([])
+        });
+    }
+    return (
+        <div className="staff-qr-scan-container">
+            <div className="scanner-title d-flex justify-content-between align-items-center">
+            <div className="">
+                <label>Select Room</label>
+                <select onChange={(e)=>setRoom(e.target.value)}  defaultValue={room} className='form-control'>
+                    <option value={room} disabled>Select</option>
+                    <option value="AB1-201">AB1-201</option>
+                    <option value="AB1-203">AB1-203</option>
+                    <option value="AB1-205">AB1-205</option>
+                    <option value="AB1-207">AB1-207</option>
+                </select>
+            </div>
+                <div className="scanner-title-text">
+                    {
+                        scan &&
+                        <div onClick={(e) => setScan(!scan)} className="toggler">Hide Scanner<i className="fas fa-times mx-2"></i></div>
+                    }
+
+                </div>
+            </div>
+            {
+                !scan &&
+                <div className="open-scanner">
+                    <div onClick={(e) => setScan(!scan)} className="trigger-scanner-icons">
+                        <i className="fas fa-qrcode"></i>
+                        <i className="fas fa-camera mx-2"></i>
+                    </div>
+                    <div onClick={(e) => setScan(!scan)} className="trigger-scanner-text">
+                        Click / Tap to Open Qr Scanner
+                    </div>
+                </div>
+
+            }
+            {
+                scan &&
+                <div className="cam-section p-0 mt-5">
+                    <div className="reader-container">
+                        <QrReader
+                            className={'reader-cam'}
+
+                            delay={5000}
+                            onError={handleError}
+                            onScan={handleScan}
+                            onResult={showResult}
+                        />
+
+                    </div>
+                    <div className="display-result">
+                        {
+
+                            Object.keys(details).length !== 0 &&
+                            <div className="display-result-card">
+                                <div className="card-image">
+                                    <img src={require(`../../assets/images/${details.image}`)} alt="pic" className="card-image-preview" />
+                                    <div className="profile-text-display fw-bold">{details.firstName}<span className='m-1'></span>{details.lastName}</div>
+                                    <div className="profile-id-display">
+                                        {details.idNumber}
+                                    </div>
+                                </div>
+                                <div className="profile-lower-section">
+                                    <div className="profile-details">
+                                        <div className="profile-details-icon text-success">
+                                            <i className="fas fa-poll"></i></div>
+                                        <div className="profile-details-text">
+                                            <div className="profile-details-title">Course</div>
+                                            <div className="profile-details-display">{details.course}</div>
+                                        </div>
+                                    </div>
+                                    <div className="profile-details ">
+                                        <div className="profile-details-icon text-warning">
+                                            <i className="fas fa-phone"></i></div>
+                                        <div className="profile-details-text">
+                                            <div className="profile-details-title">Contact</div>
+                                            <div className="profile-details-display">{details.phoneNumber}</div>
+                                        </div>
+                                    </div>
+                                    <div className="profile-details">
+                                        <div className="profile-details-icon text-primary">
+                                            <i className="fas fa-envelope"></i></div>
+                                        <div className="profile-details-text">
+                                            <div className="profile-details-title">Email</div>
+                                            <div className="profile-details-display">{details.email}</div>
+                                        </div>
+                                    </div>
+                                    <div className="profile-details">
+                                        <div className="profile-details-icon text-danger">
+                                            <i className="fas fa-map-marked-alt"></i></div>
+                                        <div className="profile-details-text">
+                                            <div className="profile-details-title">Address</div>
+                                            <div className="profile-details-display">{details.address}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card-bottom-btn p-2">
+                                    <div onClick={() => cancelScan()} className="btn btn-warning me-2 ">Cancel</div>
+                                    <div onClick={() => saveScan()} className="btn btn-primary">Add</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            {
+                scan &&
+                <div className="table-list border">
+                    <div className="attendance-table-container">
+                        <div className="table-title pb-5 fw-bold"><i className="fas fa-clipboard-list me-2"></i>Scanned List</div>
+                        {
+                            attendance.length > 0 &&
+                            <div className="table-control d-flex justify-content-end align-items-center mb-5 px-4">
+                                {/* <div className="selection">
+                                    <label className='att-label'>Room</label>
+                                    <select className='att-select'>
+                                        <option value={'1'}>AB1-205</option>
+                                        <option value={'2'}>AB1-206</option>
+                                        <option value={'3'}>AB1-208</option>
+                                    </select>
+                                </div>
+                                <div className="selection">
+                                    <label className='att-label'>Subject</label>
+                                    <select className='att-select'>
+                                        <option value={'1'}>CC 101</option>
+                                        <option value={'2'}>OOP</option>
+                                        <option value={'3'}>DSA</option>
+                                    </select>
+                                </div>
+                                <div className="selection">
+                                    <label className='att-label'>Section</label>
+                                    <select className='att-select'>
+                                        <option value={'1'}>IT-1A</option>
+                                        <option value={'2'}>IT-2B</option>
+                                        <option value={'3'}>IT-3C</option>
+                                    </select>
+                                </div> */}
+                                <div className="selection">
+                                    <div onClick={() => saveData()} className="btn btn-primary"><i className="fas fa-save me-3"></i>Save Attendance</div>
+                                </div>
+                            </div>
+                        }
+                        <div className="tables-flex">
+                            <table className="campus-table table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th className='' scope="col"><i className="ms-2 fas fa-hashtag"></i></th>
+                                        <th className='' scope="col">ID Number</th>
+                                        <th className='' scope="col">Full Name</th>
+                                        <th className='' scope="col">Room</th>
+                                        <th className='' scope="col">Time</th>
+                                        <th className='' scope="col">Date</th>
+                                        <th className=' text-center' scope="col"><i className="ms-2 fas fas fa-tools"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        attendance.length > 0 &&
+                                        attendance.map((list) => (
+
+                                            <tr key={list.id}>
+                                                <th scope="row">{list.id}</th>
+                                                <td>{list.idNumber}</td>
+                                                <td>{list.firstName}<span className='m-1'></span>{list.lastName}</td>
+                                                <td>{room}</td>
+                                                <td>{Date().toString().slice(16, 25)}</td>
+                                                {/* <td>{ out?  Date().toString().slice(16,25): '--'}</td> */}
+                                                <td>{Date().toString().slice(0, 16)}</td>
+                                                <td>
+                                                    <div className="table-options">
+                                                        <span onClick={() => removeList(list.id)} className='option-delete'><i className="fas fa-trash-alt"></i></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    )
+}
+
+export default StaffQrScan;

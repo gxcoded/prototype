@@ -1,0 +1,17 @@
+.svg-display-container{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    z-index: 0;
+   
+}
+.svg-display-upper,
+.svg-display-lower{
+    height: 50%;
+}
+.svg-display-upper{
+   background: url('../images/backview.jpg');
+   background-position:top-left;
+   background-size:cover;
+   background-repeat: no-repeat;
+}

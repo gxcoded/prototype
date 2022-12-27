@@ -1,0 +1,65 @@
+.login-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-form-contents {
+  position: relative;
+  min-height: 400px;
+  width: 320px;
+  border-radius: 20px;
+  background: white !important;
+  padding: 1em;
+  box-shadow: var(--shadowColor);
+  display: grid;
+}
+.login-form-logo {
+  position: absolute;
+  width: 100%;
+  margin-top: -40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-psu-logo {
+  height: 80px;
+  width: 80px;
+  background: url("../images/psuLogo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+}
+.form-fields {
+  margin-top: 3em;
+}
+.login-form-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+.qr-icon {
+  color: var(--teal);
+  margin-right: 10px;
+}
+.login-form-title {
+  font-size: 500;
+  color: var(--blue);
+}
+label {
+  color: var(--teal);
+  font-size: 0.9em;
+}
+span {
+  font-size: 1em;
+}
+.forgot-password,
+.register-link {
+  padding: 0em 1.5em;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 0.5em;
+}

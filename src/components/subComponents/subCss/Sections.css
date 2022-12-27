@@ -1,0 +1,51 @@
+.sections-title {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+.sections-main {
+  margin-top: 2em;
+  padding: 1em;
+  box-shadow: var(--shadowColor);
+  min-height: 500px;
+  border-radius: 20px;
+}
+.sections-main-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.section-cols {
+  width: 25%;
+  padding: 1em;
+  border-radius: 20px;
+}
+.section-cols-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 0.5em 0;
+}
+.section-cols ul {
+  border: 1px solid var(--borderColor);
+}
+
+.section-cols-li {
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5em !important;
+}
+.section-li-btn,
+.section-li-btn-sec {
+  padding: 0.3em 1em;
+  margin: 0 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(128, 123, 123);
+}
+.active-academic,
+.active-level,
+.active-sem {
+  background: var(--blue);
+  color: white;
+}

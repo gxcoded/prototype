@@ -1,0 +1,160 @@
+.chat-nurse-container {
+  padding: 2em;
+}
+.chat-nurse-main {
+  height: 500px;
+  background: white;
+  box-shadow: var(--shadowColor);
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.chat-nurse-main-left {
+  width: 25%;
+  border-right: 1px solid var(--borderColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat-nurse-main-right {
+  width: 75%;
+  position: relative;
+  padding: 0 3em;
+}
+.chat-input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.chat-input-main {
+  width: 100%;
+  text-align: right;
+  padding: 1em 2em;
+}
+.chat-nurse-header {
+  padding: 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.chat-nurse-info {
+  text-align: center;
+}
+.chat-nurse-info-img {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+.chat-nurse-info-name {
+  font-size: 1.1em;
+  margin: 0.2em 0;
+  font-weight: 600;
+}
+.chat-nurse-info-role {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+.chat-nurse-info-number {
+  font-size: 1.1em;
+  margin-top: 1em;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 1px;
+}
+.chat-nurse-thread {
+  margin-top: 1em;
+  height: 300px;
+  overflow: auto;
+  padding: 1em 2em;
+  font-size: 0.8rem;
+}
+.chat-texts {
+  margin: 1em 0;
+  display: flex;
+}
+.chat-sent {
+  justify-content: end;
+}
+.chat-content {
+  padding: 0.5em 1em;
+  background-color: rgb(240, 240, 240);
+  border-radius: 15px;
+  max-width: 500px;
+}
+.chat-sent .chat-content {
+  background: var(--blue);
+  color: white;
+  border-bottom-right-radius: 0;
+}
+.chat-receive .chat-content {
+  border-top-left-radius: 0;
+}
+.chat-dates {
+  margin-top: 1em;
+  padding: 0.2em;
+  text-align: right;
+  font-weight: 500;
+  font-size: 0.7rem;
+}
+.on-top-of-key {
+  height: 100%;
+}
+@media (max-width: 1000px) {
+  .chat-nurse-main {
+    flex-direction: column;
+  }
+  .chat-nurse-main-right,
+  .chat-nurse-main-left {
+    width: 100%;
+    height: 100%;
+  }
+  .chat-nurse-main-left {
+    border: none;
+    border-bottom: 1px solid var(--borderColor);
+    flex-direction: row;
+    justify-content: start;
+    height: 20%;
+  }
+  .chat-nurse-info {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    padding: 1em;
+  }
+  .chat-thread-details {
+    margin-left: 2em;
+  }
+  .chat-nurse-info-img {
+    height: 60px;
+    width: 60px;
+  }
+  .chat-nurse-info-name {
+    font-size: 0.9em;
+    margin: 0.1em 0;
+    font-weight: 600;
+  }
+  .chat-nurse-info-role {
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+  .chat-nurse-info-number {
+    display: none;
+  }
+}
+@media (max-width: 550px) {
+  .chat-nurse-container {
+    padding: 2em 0.5em;
+  }
+  .chat-nurse-main-right {
+    padding: 0;
+  }
+  .chat-nurse-header {
+    display: none;
+  }
+}

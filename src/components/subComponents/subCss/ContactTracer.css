@@ -1,0 +1,136 @@
+.contact-tracer-summary {
+  min-height: 300px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadowColor);
+  padding: 2em;
+  margin-bottom: 1em;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start; */
+}
+.contact-tracer-summary-bottom {
+  text-align: right;
+}
+.contact-tracer-summary-cards {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contact-tracer-card {
+  height: 150px;
+  width: 250px;
+  border-radius: 20px;
+  box-shadow: var(--shadowColorLight);
+  margin-right: 1em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-left: 5px solid var(--red);
+}
+.negative-cards {
+  border-left: 5px solid var(--teal);
+}
+
+.contact-tracer-search {
+  height: 200px;
+  padding: 1em;
+  margin-top: 1em;
+  border-radius: 20px;
+  /* box-shadow: var(--shadowColorLight); */
+}
+.contact-tracer-card-counter {
+  font-size: 3em;
+  font-weight: 500;
+}
+.contact-tracer-card-label {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+.contact-tracer-main {
+  display: flex;
+}
+.contact-tracer-main-left,
+.contact-tracer-main-right {
+  width: 40%;
+  overflow: hidden;
+}
+.contact-tracer-main-left {
+  display: flex;
+  width: 60%;
+  border-radius: 20px;
+}
+.contact-tracer-main-right {
+  margin-left: 1em;
+  background: white;
+  padding: 1em;
+  border-radius: 20px;
+  display: flex;
+  box-shadow: var(--shadowColorLight);
+}
+.contact-tracer-form {
+  padding: 2em;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  box-shadow: var(--shadowColor);
+  overflow: hidden;
+}
+.contact-tracer-img {
+  width: 80%;
+  border-radius: 50px;
+}
+.tracer-search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tracer-form-title {
+  padding: 1em;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.contact-tracer-words {
+  min-height: 100px;
+  margin: 2em 0;
+  border-radius: 20px;
+  padding: 1em;
+  font-size: 0.8em;
+  box-shadow: var(--shadowColorLight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tracer-calendar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.tracer-calendar-icon {
+  font-size: 3em;
+  color: var(--red);
+}
+.tracer-calendar-date {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.search-result-table {
+  margin-top: 2em;
+  padding: 2em;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadowColorLight);
+  min-height: 400px;
+}
+.trace-result-stats {
+  padding: 2em;
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+}

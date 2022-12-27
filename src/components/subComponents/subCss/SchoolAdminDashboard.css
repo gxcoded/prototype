@@ -1,0 +1,67 @@
+.admin-dashboard-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.admin-dashboard-main {
+  min-height: 300px;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 2em 0;
+}
+
+.admin-dashboard-box {
+  height: 160px;
+  width: 250px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadowColor);
+  border-left: 6px solid var(--blue);
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+.admin-dashboard-box:hover .admin-dashboard-box-right {
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+.admin-dashboard-box:hover .admin-dashboard-box-left {
+  width: 0;
+  opacity: 0;
+}
+.admin-dashboard-box-left,
+.admin-dashboard-box-right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.7s ease;
+}
+.admin-dashboard-box-right {
+  width: 60%;
+}
+.admin-dashboard-box-left {
+  font-size: 2.5em;
+}
+.admin-dashboard-box-right-label {
+  font-weight: bold;
+  font-size: 0.8em;
+}
+.admin-dashboard-box-right-count {
+  font-size: 2.5em;
+}
+@media (max-width: 530px) {
+  .admin-dashboard-box {
+    width: 100%;
+    margin: 1em 3em;
+  }
+}
+@media (max-width: 400px) {
+  .admin-dashboard-box {
+    margin: 1em auto;
+  }
+}

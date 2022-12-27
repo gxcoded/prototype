@@ -1,0 +1,30 @@
+.custom-pop-up {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  transition: 0.5s ease;
+}
+.custom-pop-up-form {
+  margin-top: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadowColor);
+  padding: 1em;
+}
+.pop-up-icon {
+  padding: 0 0.5em;
+  font-size: 2em;
+  color: var(--blue);
+}
+.hide-pop-up {
+  margin-top: -100em;
+}

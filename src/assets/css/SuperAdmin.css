@@ -1,0 +1,202 @@
+.sudo-container {
+  position: fixed;
+  width: 100%;
+  display: flex;
+}
+
+.sudo-left {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  overflow: auto;
+  padding: 1em;
+  padding-bottom: 10em;
+  width: 20%;
+  box-shadow: var(--shadowColor);
+}
+
+.nav-collapse {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.nav-collapse-btn {
+  padding: 1em;
+  cursor: pointer;
+  font-weight: 600;
+  display: none;
+  font-size: 1.2rem;
+  color: var(--red);
+}
+.sudo-right {
+  width: 80%;
+  transition: none;
+}
+.img-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+}
+.logo-top {
+  height: 50px;
+  width: 50px;
+}
+.psu-title {
+  font-size: 1em;
+  font-weight: 600;
+}
+.psu-sub-text {
+  font-size: 0.7em;
+  font-weight: 500;
+}
+.admin-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.admin-label > img {
+  border-radius: 50%;
+  padding: 0.1em;
+  height: 50px;
+  width: 50px;
+}
+.sudo-name {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.side-button {
+  padding: 0.6em 2em;
+  border-radius: 5px;
+  font-size: 0.8em;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 1em;
+}
+.side-button:hover,
+.activ {
+  background: var(--blue);
+  color: white;
+}
+.sub-label {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: rgb(146, 128, 128);
+}
+.sudo-right-top {
+  height: 80px;
+  padding: 0 5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+}
+.sudo-right-top .qr {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--teal);
+}
+.sudo-right-top > span {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.sudo-right-main {
+  height: 90vh;
+  overflow: auto;
+  padding: 3em 5em;
+}
+.burger-bars {
+  cursor: pointer;
+  display: none;
+}
+.notify-override {
+  position: relative;
+}
+
+.notifications-pop-section {
+  position: absolute;
+  padding: 1em;
+  display: flex;
+  width: 100%;
+  height: 400px;
+  transition: 1s ease;
+  margin-top: 0;
+  z-index: 5;
+}
+.notification-pop-block {
+  max-width: 400px;
+  width: 100%;
+  background: white;
+  padding: 1em;
+  overflow: auto;
+  box-shadow: var(--shadowColorLight);
+  border-radius: 10px;
+  border-top-left-radius: 0;
+}
+.hide-notify {
+  margin-top: -100em;
+}
+.notification-pop-header {
+  text-align: right;
+  font-size: 1.5em;
+}
+.pop-closer {
+  cursor: pointer;
+}
+.notification-pop-list {
+  padding: 1em;
+  min-height: 50px;
+  background: blue;
+  margin: 0.5em 0;
+  box-shadow: var(--shadowColorLight);
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+@media (max-width: 1400px) {
+  .burger-bars {
+    display: unset;
+  }
+  .nav-collapse-btn {
+    display: unset;
+  }
+
+  .sudo-left {
+    background: white;
+    width: 35%;
+    position: absolute;
+    margin-left: -100%;
+    transition: 1s ease;
+  }
+  .sudo-right {
+    width: 100%;
+  }
+  .shown {
+    margin-left: 0%;
+  }
+}
+@media (max-width: 1000px) {
+  .sudo-right-main {
+    padding: 2em;
+  }
+}
+@media (max-width: 850px) {
+  .sudo-left {
+    width: 50%;
+  }
+  .sudo-right-top {
+    padding: 0 1em;
+  }
+}
+@media (max-width: 700px) {
+  .sudo-right-main {
+    padding: 0.5em;
+    padding-left: 1em;
+  }
+  .sudo-left {
+    width: 80%;
+  }
+}

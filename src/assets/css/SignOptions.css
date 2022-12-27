@@ -1,0 +1,144 @@
+.wrapper-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-container {
+    display: flex;
+    height: 100%;
+    width: 70%;
+    margin: auto;
+    background:url('../images/illustration.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.options {
+    min-height: 40%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    overflow: hidden;
+   
+
+}
+
+.options-left,
+.options-right {
+    padding: 0 2em;
+    width: 50%;
+
+}
+
+.options-right {
+    display: flex;
+    padding: 0 5em;
+}
+
+.options-left-title {
+    font-size: 2.5rem;
+    line-height: 60px;
+    margin-bottom: .5em;
+    color: var(--teal);
+}
+
+.options-right-title {
+   
+    font-size: 1.2rem;
+    color: var(--blue);
+    
+}
+
+.context {
+    font-size: 1rem;
+}
+
+.my-btn {
+    margin: 1em 0;
+    border: none;
+    padding: .4em;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--shadowColor);
+    text-transform: uppercase;
+}
+
+.back-btn {
+    width: 40%;
+    background: var(--red);
+}
+.options-right-form{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    padding:.7em 2em;
+    margin: auto;
+    border-radius: 20px;
+    background:url('../images/illustration.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+
+}
+.staff-btn{
+    background:var(--blue);
+    padding:.8em;
+}
+.student-btn{
+    background:var(--teal);
+    padding:.8em;
+}
+
+@media(max-width:1700px){
+    .options-right {
+  
+        padding:0 1em;
+    }
+    
+}
+@media(max-width:1500px){
+   
+    .options-left-title {
+        font-size: 2rem;
+        
+    }
+}
+@media(max-width:1210px){
+    .options {
+        flex-direction: column;
+    
+    }
+    .options-left,
+    .options-right {
+      width: 100%;
+      height: 500px;
+
+}
+}
+@media(max-width:650px){
+    
+    .option-container {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+}
+@media(max-width:420px){
+    .options {
+       
+        width: 100%;
+       
+    
+    }
+    .option-container {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+}

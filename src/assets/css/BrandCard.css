@@ -1,0 +1,6 @@
+.brand-card{
+    min-height: 100px;
+    min-width: 400px;
+    border-radius: 10px;
+    background: white;
+}

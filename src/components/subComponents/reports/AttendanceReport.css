@@ -1,0 +1,68 @@
+.attendance-report-main {
+  min-height: 100vh;
+}
+
+.attendance-main-page {
+  width: 100%;
+  min-height: 100%;
+}
+.attendance-report-header {
+  text-align: center;
+}
+.attendance-report-img {
+  width: 60%;
+}
+.page-preview {
+  width: 80%;
+  margin: 0 auto;
+}
+.attendance-report-header-title {
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 1.5em;
+  padding: 1em 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.attendance-report-header-details {
+  margin-top: 1em;
+  margin-bottom: 5em;
+}
+.report-header-detail {
+  display: flex;
+}
+.report-left {
+  width: 15%;
+  font-weight: bold;
+}
+.report-right {
+  min-width: 20%;
+}
+.td-title {
+  font-weight: 600;
+}
+.print-controls {
+  position: fixed;
+  width: 80%;
+  display: flex;
+  padding: 2em 5em;
+  justify-content: flex-end;
+  align-items: center;
+}
+.attendance-report-table {
+  margin-top: 2em;
+}
+.attendance-report-table table tr td {
+  font-size: 0.7rem;
+}
+.attendance-report-table-header {
+  padding: 1em;
+  color: white;
+  font-weight: bold;
+}
+.report-table-start {
+  font-weight: 500;
+  font-size: 0.8rem;
+  padding: 0.5em 2em;
+}

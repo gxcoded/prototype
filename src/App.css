@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+:root {
+  /* --teal: #5dcea1; */
+  --teal: #36ae7c;
+  --teal: #50bfa5;
+  /* --red: #b64331; */
+  --red: #f47458;
+  --tealLinear: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)),
+    #5dcea1;
+  --blue: #4286f4;
+  --darkBlue: #28427b;
+  --yellow: #ffc107;
+  --shadowColor: 0.1em 0.1em 0.7em rgba(188, 204, 247, 0.5);
+  --shadowColorLight: 1px 1px 5px rgba(188, 204, 247, 0.5);
+  --textShadow: 0.1em 0.1em 0.1em #a2e5ef;
+  --borderColor: rgb(226, 205, 205);
+  --textColor: rgb(102, 99, 99);
+  --fadeWhite: linear-gradient(
+    rgba(255, 242, 242, 0.1),
+    rgba(233, 223, 223, 0.1)
+  );
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box !important;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+}
+.wrapper-bg {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("./assets/images/hero.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.my-container {
+  height: 100%;
+  width: 70%;
+  margin: auto;
+}
+.spinner {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.qr-logo {
+  color: var(--teal);
+}
+.form-control {
+  min-width: 250px !important;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 1rem;
+}
+
+.btn-custom-red {
+  background: var(--red);
+  color: white;
+}
+.btn-custom-teal {
+  background: var(--teal);
+  color: white;
+}
+.btn-custom-red:hover {
+  color: white;
+}
+a {
+  color: unset !important;
+}
+.please-login {
+  background: url("./assets/images/hero.png");
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.please-login-box {
+  text-align: center;
+  overflow: hidden;
+}
+.please-login-text-section {
+  height: 80%;
+}
+.please-login-text-title {
+  padding: 1em 0;
+  font-size: 1.6em;
+  font-weight: 500;
+}
+.override {
+  padding: 0 !important;
+}
+.qr-code-box {
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+#qrCodeDownload {
+  display: none;
+}
+.btn-sm {
+  border: none !important;
+  min-width: 90px !important;
+  font-size: 0.7em !important;
+  margin: 0.5em;
+}
+.side-button span {
+  background: none !important;
+  color: inherit;
+}
+@media (max-width: 1400px) {
+  *::-webkit-scrollbar {
+    display: unset;
+  }
+}
