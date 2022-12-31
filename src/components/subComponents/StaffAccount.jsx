@@ -3,7 +3,7 @@ import QrCodeDisplay from "../QrCodeDisplay";
 import StaffProfile from "./StaffProfile";
 import { useState } from "react";
 
-const StaffAccount = ({ accountInfo, reloadPage }) => {
+const StaffAccount = ({ accountInfo, reloadPage, popModalToggler }) => {
   const [api] = useState(process.env.REACT_APP_API_SERVER);
 
   return (
@@ -12,10 +12,11 @@ const StaffAccount = ({ accountInfo, reloadPage }) => {
         <div className="staff-account-container-left-content">
           <div className="staff-account-container-left-content-profile">
             <img
+              onClick={() => popModalToggler()}
               src={`${api}/${accountInfo.image}`}
               // src={require(`../../../../server/uploads/${accountInfo.image}`)}
               alt=""
-              className="staff-account-profile"
+              className="staff-account-profile pointer"
             />
             <div className="staff-account-profile-name">
               {accountInfo.firstName} {accountInfo.lastName}

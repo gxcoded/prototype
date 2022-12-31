@@ -8,6 +8,7 @@
   min-height: 60vh;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .new-meeting-left {
   width: 30%;
@@ -16,6 +17,7 @@
 .new-meeting-right {
   width: 70%;
   padding: 1em;
+  min-width: 400px;
   overflow: auto;
 }
 .hide-right {

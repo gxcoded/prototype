@@ -12,8 +12,13 @@ const ExcuseModal = ({
   currentRoomId,
   remarksToggler,
   reload,
+  currentLogs,
 }) => {
   const [showList, setShowList] = useState(true);
+
+  useEffect(() => {
+    console.log(currentLogs);
+  }, []);
 
   return (
     <div className="excuse-modal-wrapper">
@@ -44,9 +49,10 @@ const ExcuseModal = ({
             <ModalTable
               reload={reload}
               onGoing={onGoing}
-              data={classStudents}
+              classStudents={classStudents}
               currentRoomId={currentRoomId}
               remarksToggler={remarksToggler}
+              currentLogs={currentLogs}
             />
           ) : (
             <ExcusedTable reload={reload} onGoing={onGoing} />

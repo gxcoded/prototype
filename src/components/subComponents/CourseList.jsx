@@ -6,15 +6,20 @@ import swal from "sweetalert";
 const CourseList = ({ accountInfo }) => {
   const [courseList, setCourseList] = useState([]);
   const [description, setDescription] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [currentId, setCurrentId] = useState("");
   const [url] = useState(process.env.REACT_APP_URL);
+  const [popUpHide, setPopUpHide] = useState(true);
+  const slide = document.querySelector("#slideTrigger");
 
   useEffect(() => {
-    const loadData = async () => {
-      const data = await fetchList();
-      setCourseList(data);
-    };
     loadData();
   }, []);
+
+  const loadData = async () => {
+    const data = await fetchList();
+    setCourseList(data);
+  };
 
   const fetchList = async () => {
     const { data } = await axios.post(`${url}/courseList`, {
@@ -71,9 +76,62 @@ const CourseList = ({ accountInfo }) => {
     }
   };
 
+  const saveEdit = async (e) => {
+    e.preventDefault();
+
+    const sendRequest = await axios.post(`${url}/updateCourse`, {
+      id: currentId,
+      description: editDescription,
+    });
+    if (await sendRequest.data) {
+      swal("Updated!", {
+        icon: "success",
+      });
+      setPopUpHide(true);
+      setEditDescription("");
+      loadData();
+    }
+  };
+
+  const editData = (value, id) => {
+    setEditDescription(value);
+    setCurrentId(id);
+    setPopUpHide(false);
+  };
+
   return (
     <div className="staff-list-container">
-      <div className="staff-list-title">
+      <div className={`custom-pop-up ${popUpHide && "hide-pop-up"}`}>
+        <div className="custom-pop-up-form">
+          <form onSubmit={saveEdit}>
+            <div className="pop-up-icon">
+              <i className="far fa-edit"></i>
+            </div>
+            <div className="form-group">
+              <input
+                required
+                minLength={"3"}
+                value={editDescription}
+                onChange={(e) => setEditDescription(e.target.value)}
+                type="text"
+                className="form-control"
+                placeholder="Description"
+              />
+            </div>
+            <div className="px-3 mt-3 text-end">
+              <div
+                onClick={() => setPopUpHide(true)}
+                className="btn btn-warning"
+              >
+                Cancel
+              </div>
+              <button className="btn btn-success mx-1">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="staff-list-title" id="top">
+        <a href="#top" id="slideTrigger" style={{ display: "none" }}></a>
         <i className="fas fa-book-reader me-3"></i>Manage Courses
       </div>
       <div className="campus-staff-main">
@@ -148,7 +206,10 @@ const CourseList = ({ accountInfo }) => {
                   </td>
                   <td>
                     <div
-                      onClick={() => deleteCourse(list._id)}
+                      onClick={() => {
+                        editData(list.description, list._id);
+                        slide.click();
+                      }}
                       className="table-options justify-content-center"
                     >
                       <span className="option-edit me-3">

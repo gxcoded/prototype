@@ -461,7 +461,7 @@ const TraceAll = ({
     <div className="trace-all-container ">
       {/* ===============Map View Pop=================== */}
       {mapView && (
-        <div className="trace-all-map-view">
+        <div className="trace-all-map-view rounded-0">
           <div className="trace-all-map-view-left">
             <div onClick={() => mapViewToggler()} className="map-view-closer">
               Close

@@ -105,3 +105,13 @@
 .list-label {
   font-weight: bold !important;
 }
+@media (max-width: 850px) {
+  .send-link-options {
+    flex-direction: column;
+  }
+}
+@media (max-width: 450px) {
+  .drag-drop-form {
+    display: none;
+  }
+}

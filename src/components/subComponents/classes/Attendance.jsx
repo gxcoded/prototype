@@ -55,6 +55,7 @@ const Attendance = ({ room }) => {
     const { data } = await axios.post(`${url}/getExcusedStudents`, {
       classRoomId: room._id,
     });
+    console.log("excused");
     console.log(data);
     return data;
   };

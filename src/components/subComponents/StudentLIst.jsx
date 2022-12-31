@@ -1,6 +1,6 @@
 import "./subCss/StaffList.css";
 import "./subCss/StudentList.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import SignUpLink from "./SignUpLink";
 
@@ -10,6 +10,11 @@ const StudentList = ({ campus, courseList }) => {
   const [filterList, setFilterList] = useState([]);
   const [api] = useState(process.env.REACT_APP_API_SERVER);
   const [url] = useState(process.env.REACT_APP_URL);
+  const slide = document.querySelector("#slideTrigger");
+  const [currentName, setCurrentName] = useState({});
+  const [tracker, setTracker] = useState(true);
+  const [currentLocation, setCurrentLocation] = useState({});
+  const [lastRoomScan, setLastRoomScan] = useState({});
 
   useEffect(() => {
     const loadData = async () => {
@@ -46,13 +51,145 @@ const StudentList = ({ campus, courseList }) => {
 
     setFilterList(data);
   };
+  const staffTracker = async (list) => {
+    const latest = await locateStaff(list._id);
+    const lastScan = await lastLocationScan(list._id);
+    setLastRoomScan(lastScan);
+    setCurrentLocation(latest);
+    setCurrentName(list);
+    setTracker(false);
+    slide.click();
+  };
+
+  const locateStaff = async (id) => {
+    const { data } = await axios.post(`${url}/staffTracker`, {
+      id,
+    });
+    console.log(data);
+    return data;
+  };
+
+  const lastLocationScan = async (id) => {
+    const { data } = await axios.post(`${url}/lastPersonalLog`, {
+      id,
+    });
+    console.log(data);
+    return data;
+  };
+
+  const dateFormatter = (timeString) => {
+    const date = new Date(Number(timeString)).toString().slice(4, 15);
+    const time = new Date(Number(timeString)).toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+
+    return `${date} ${time}`;
+  };
+
+  const timeFormatter = (timeString) => {
+    const date = new Date(Number(timeString)).toString().slice(4, 15);
+    const time = new Date(Number(timeString)).toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+
+    return `${time}`;
+  };
 
   return (
     <div className="staff-list-container">
-      <div className=" d-flex justify-content-between align-items-center">
+      <div
+        onClick={() => setTracker(true)}
+        className={`tracker-pop ${tracker && "hide-tracker"}`}
+      >
+        <div className="tracker-main-box">
+          <div className="tracker-icon">
+            <i className="fas fa-map-marker-alt"></i>
+          </div>
+          <div className="tracker-name">
+            {currentName.lastName}, {currentName.firstName}
+          </div>
+          <div className="tracker-main-content">
+            <div className="tracker-box-left">
+              <div className="tracker-text-header">Last Personal QR Scan</div>
+              {Object.keys(currentLocation).length > 0 ? (
+                <Fragment>
+                  <div className="tracker-text-room">
+                    {currentLocation.room.description}
+                  </div>
+
+                  <div className="tracker-text">
+                    <div>
+                      <div>{dateFormatter(currentLocation.date)}</div>
+                    </div>
+                    {/* <div className="time-log-info">
+                      <div>
+                        Time In:
+                        <span className="ms-2">
+                          {timeFormatter(currentLocation.start)}
+                        </span>
+                      </div>
+                      <div>
+                        Time Out:
+                        <span className="ms-2">
+                          {currentLocation.end !== null
+                            ? timeFormatter(currentLocation.end)
+                            : "--"}
+                        </span>
+                      </div>
+                    </div> */}
+                  </div>
+                </Fragment>
+              ) : (
+                <div className="tracker-text-unknown">Unknown</div>
+              )}
+            </div>
+            <div className="tracker-box-right">
+              <div className="tracker-text-header">Last Location QR Scan</div>
+              {Object.keys(lastRoomScan).length > 0 ? (
+                <Fragment>
+                  <div className="tracker-text-room">
+                    {lastRoomScan.locationId.description}
+                  </div>
+
+                  <div className="tracker-text">
+                    <div>{dateFormatter(lastRoomScan.date)}</div>
+                    {/* <div className="time-log-info">
+                      <div>
+                        Time In:
+                        <span className="ms-2">
+                          {timeFormatter(lastRoomScan.timeIn)}
+                        </span>
+                      </div>
+                      <div>
+                        Time Out:
+                        <span className="ms-2">
+                          {currentLocation.end !== null
+                            ? timeFormatter(lastRoomScan.timeOut)
+                            : "--"}
+                        </span>
+                      </div>
+                    </div> */}
+                  </div>
+                </Fragment>
+              ) : (
+                <div className="tracker-text-unknown">Unknown</div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className=" d-flex justify-content-between align-items-center"
+        id="top"
+      >
         <div className="staff-list-title">
           <i className="fas fa-user-graduate me-3"></i>Manage Students
         </div>
+        <a href="#top" id="slideTrigger" style={{ display: "none" }}></a>
         {!sendLink ? (
           <div
             onClick={() => setSendLink(!sendLink)}
@@ -178,7 +315,12 @@ const StudentList = ({ campus, courseList }) => {
                         )}
                       </td>
                       <td>
-                        <div className="table-options">
+                        <div
+                          className="table-options pointer"
+                          onClick={() => {
+                            staffTracker(list);
+                          }}
+                        >
                           <span className="text-warning me-2">
                             <i className="fas fa-expand-arrows-alt"></i>
                           </span>

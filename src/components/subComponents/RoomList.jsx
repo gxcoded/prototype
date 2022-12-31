@@ -24,6 +24,8 @@ const RoomList = ({ campus }) => {
   const [defaultLat, setDefaultLat] = useState(0);
   const [defaultLng, setDefaultLng] = useState(0);
   const [iconBase] = useState("http://maps.google.com/mapfiles/ms/icons");
+  const slide = document.querySelector("#slideTrigger");
+  const [showHint, setShowHint] = useState(true);
 
   const [floors] = useState([
     {
@@ -93,6 +95,7 @@ const RoomList = ({ campus }) => {
 
   const addRoom = async (e) => {
     e.preventDefault();
+    setShowHint(true);
     setIsEdit(false);
     mapToggler();
   };
@@ -181,18 +184,20 @@ const RoomList = ({ campus }) => {
           currentCoords={{ lat: currentLat, lng: currentLng }}
           current={current}
           defaultCoordinates={{ lat: defaultLat, lng: defaultLng }}
+          showHint={showHint}
         />
       )}
-      <div className="staff-list-title">
+      <div className="staff-list-title" id="top">
+        <a href="#top" id="slideTrigger" style={{ display: "none" }}></a>
         <i className="fas fa-city me-3"></i>Manage Locations
       </div>
       <div className="campus-staff-main room-list-main">
-        <div className="list-top-controls">
-          <div className="list-counter-box">
+        <div className="list-top-controls list-top-location-controls">
+          <div className="list-counter-box location-controls">
             <div className="list-counter">{rooms.length}</div>
             <div className="list-counter-label">Total Locations</div>
           </div>
-          <div className="list-filter-controls">
+          <div className="list-filter-controls location-controls">
             <div className="controls-title">
               <i className="me-2 fas fa-plus"></i>Add Locations
             </div>
@@ -343,7 +348,12 @@ const RoomList = ({ campus }) => {
                     >
                       Cancel
                     </div>
-                    <button className="btn btn-success mx-1">Next</button>
+                    <button
+                      onClick={slide.click()}
+                      className="btn btn-success mx-1"
+                    >
+                      Next
+                    </button>
                   </div>
                 </form>
               </div>
@@ -372,9 +382,9 @@ const RoomList = ({ campus }) => {
             />
           </div>
           <div className="table-header px-2 mb-5 d-flex justify-content-between align-items-center">
-            <div className="table-header-text fw-bold">Rooms</div>
+            <div className="table-header-text fw-bold">Locations</div>
             <div>
-              <div className="input-group">
+              {/* <div className="input-group">
                 <input
                   placeholder="Description"
                   type="search"
@@ -385,7 +395,7 @@ const RoomList = ({ campus }) => {
                 <button type="button" className="btn btn-outline-primary">
                   Search
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <table className="campus-table table table-striped">
@@ -440,6 +450,8 @@ const RoomList = ({ campus }) => {
                             setCurrentLat(Number(list.lat));
                             setCurrentLng(Number(list.lng));
                             setEditModal(true);
+                            setShowHint(true);
+                            slide.click();
                           }}
                           className="option-edit text-warning me-3"
                           data-mdb-toggle="tooltip"
@@ -459,6 +471,7 @@ const RoomList = ({ campus }) => {
                           onClick={() => {
                             setSelected(list);
                             setShowModal(true);
+                            slide.click();
                           }}
                           className="option-edit text-dark me-3"
                           data-mdb-toggle="tooltip"
@@ -466,6 +479,23 @@ const RoomList = ({ campus }) => {
                         >
                           <i className="fas fa-cog"></i>
                         </span>
+                        {/* <span
+                          onClick={() => {
+                            setCurrent(list);
+                            setEditDescription(list.description);
+                            setCurrentFloor(list.floor);
+                            setCurrentLat(Number(list.lat));
+                            setCurrentLng(Number(list.lng));
+                            setShowHint(false);
+                            setShowMap(true);
+                            slide.click();
+                          }}
+                          className="option-edit text-success me-3"
+                          data-mdb-toggle="tooltip"
+                          title="View Info"
+                        >
+                          <i className="fas fa-info-circle"></i>
+                        </span> */}
                       </div>
                     </td>
                   </tr>

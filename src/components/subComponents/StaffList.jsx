@@ -10,9 +10,11 @@ const StaffList = ({ accountInfo, roles }) => {
   const [filterList, setFilterList] = useState([]);
   const [tracker, setTracker] = useState(true);
   const [currentLocation, setCurrentLocation] = useState({});
+  const [lastRoomScan, setLastRoomScan] = useState({});
   const [url] = useState(process.env.REACT_APP_URL);
   const [currentName, setCurrentName] = useState({});
   const [api] = useState(process.env.REACT_APP_API_SERVER);
+  const slide = document.querySelector("#slideTrigger");
 
   const fetchList = async () => {
     const response = await axios.post(`${url}/staffAccounts`, {
@@ -70,9 +72,12 @@ const StaffList = ({ accountInfo, roles }) => {
 
   const staffTracker = async (list) => {
     const latest = await locateStaff(list._id);
+    const lastScan = await lastLocationScan(list._id);
+    setLastRoomScan(lastScan);
     setCurrentLocation(latest);
     setCurrentName(list);
     setTracker(false);
+    slide.click();
   };
 
   const locateStaff = async (id) => {
@@ -81,6 +86,25 @@ const StaffList = ({ accountInfo, roles }) => {
     });
     console.log(data);
     return data;
+  };
+
+  const lastLocationScan = async (id) => {
+    const { data } = await axios.post(`${url}/lastPersonalLog`, {
+      id,
+    });
+    console.log(data);
+    return data;
+  };
+
+  const dateFormatter = (timeString) => {
+    const date = new Date(Number(timeString)).toString().slice(4, 15);
+    const time = new Date(Number(timeString)).toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+
+    return `${date} ${time}`;
   };
 
   return (
@@ -96,26 +120,50 @@ const StaffList = ({ accountInfo, roles }) => {
           <div className="tracker-name">
             {currentName.lastName}, {currentName.firstName}
           </div>
-          {Object.keys(currentLocation).length > 0 ? (
-            <Fragment>
-              <div className="tracker-text-room">
-                {currentLocation.room.description}
-              </div>
-              <div className="tracker-text-header">Last Scan</div>
-              <div className="tracker-text">
-                <div>
-                  {new Date(Number(currentLocation.date))
-                    .toString()
-                    .slice(0, 25)}
-                </div>
-              </div>
-            </Fragment>
-          ) : (
-            <div className="tracker-text-unknown">Unknown Location</div>
-          )}
+          <div className="tracker-main-content">
+            <div className="tracker-box-left">
+              <div className="tracker-text-header">Last Personal QR Scan</div>
+              {Object.keys(currentLocation).length > 0 ? (
+                <Fragment>
+                  <div className="tracker-text-room">
+                    {currentLocation.room.description}
+                  </div>
+
+                  <div className="tracker-text">
+                    <div>
+                      <div>{dateFormatter(currentLocation.date)}</div>
+                    </div>
+                  </div>
+                </Fragment>
+              ) : (
+                <div className="tracker-text-unknown">Unknown</div>
+              )}
+            </div>
+            <div className="tracker-box-right">
+              <div className="tracker-text-header">Last Location QR Scan</div>
+              {Object.keys(lastRoomScan).length > 0 ? (
+                <Fragment>
+                  <div className="tracker-text-room">
+                    {lastRoomScan.locationId.description}
+                  </div>
+
+                  <div className="tracker-text">
+                    <div>{dateFormatter(lastRoomScan.date)}</div>
+                  </div>
+                </Fragment>
+              ) : (
+                <div className="tracker-text-unknown">Unknown</div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-      <div className=" d-flex justify-content-between align-items-center">
+      <div
+        className=" d-flex justify-content-between align-items-center"
+        id="top"
+      >
+        <a href="#top" id="slideTrigger" style={{ display: "none" }}></a>
+
         <div className="staff-list-title">
           <i className="fas fa-users-cog me-3"></i>Manage Campus Staff
         </div>
@@ -251,7 +299,7 @@ const StaffList = ({ accountInfo, roles }) => {
                           }}
                         >
                           <span className="me-2">
-                            <i className="fas fa-map-marked-alt"></i>
+                            <i className="fas fa-expand-arrows-alt"></i>
                           </span>
                           {/* <span className="text-warning me-2">
                             <i className="fas fa-expand-arrows-alt"></i>

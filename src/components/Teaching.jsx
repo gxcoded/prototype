@@ -15,6 +15,7 @@ import BounceLoader from "react-spinners/BounceLoader";
 import { useState, useEffect, Fragment } from "react";
 import LoggedOut from "./LoggedOut";
 import axios from "axios";
+import Pop from "./modals/Pop";
 
 const Teaching = () => {
   const [loading, setLoading] = useState(true);
@@ -39,22 +40,30 @@ const Teaching = () => {
   const [scan, setScan] = useState(false);
   const [api] = useState(process.env.REACT_APP_API_SERVER);
   const [allowed, setAllowed] = useState(false);
+  const [showPopModal, setShowPopModal] = useState(false);
 
   useEffect(() => {
     localStorage.getItem("ctIdToken") !== null && setLoggedIn(true);
-
-    const fetchInfo = async () => {
-      const info = await getInfo();
-      setIsChair(Object.keys(await chairChecker()).length > 0);
-      setAccountInfo(info);
-      isAllowed(info._id);
-    };
 
     fetchInfo();
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, [updated]);
+
+  const fetchInfo = async () => {
+    const info = await getInfo();
+    setIsChair(Object.keys(await chairChecker()).length > 0);
+    setAccountInfo(info);
+    isAllowed(info._id);
+  };
+
+  const popModalToggler = () => {
+    setShowPopModal(!showPopModal);
+  };
+  const reloadAccountInfo = () => {
+    fetchInfo();
+  };
 
   const reloadPage = () => {
     setUpdated(!updated);
@@ -114,6 +123,13 @@ const Teaching = () => {
 
   return (
     <div className="sudo-container">
+      {showPopModal && (
+        <Pop
+          accountInfo={accountInfo}
+          popModalToggler={popModalToggler}
+          reloadAccountInfo={reloadAccountInfo}
+        />
+      )}
       {loading ? (
         <div className="spinner border loader-effect">
           <BounceLoader color="#5dcea1" loading={loading} size={150} />
@@ -177,7 +193,7 @@ const Teaching = () => {
                             className="side-button"
                           >
                             <i className="fas fa-vector-square me-3"></i>
-                            Location Scanner
+                            Personal Scanner
                           </div>
                         </li>
                       </Fragment>
@@ -363,8 +379,10 @@ const Teaching = () => {
                             } */}
                   {account && (
                     <StaffAccount
-                      accountInfo={accountInfo}
                       reloadPage={reloadPage}
+                      popModalToggler={popModalToggler}
+                      accountInfo={accountInfo}
+                      reloadAccountInfo={reloadAccountInfo}
                     />
                   )}
                   {scan && <Scanner accountInfo={accountInfo} />}

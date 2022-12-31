@@ -11,9 +11,37 @@ const options = {
 const MapView = ({ uniqueRooms, defaultCenter, infoSetter }) => {
   const [loading, setLoading] = useState(true);
   const [currentLocation, setCurrentLocation] = useState([]);
+  const [iconBase] = useState("http://maps.google.com/mapfiles/ms/icons");
+
+  const iconSetter = (floor) => {
+    switch (floor) {
+      case "Ground Floor":
+        return `${iconBase}/red-dot.png`;
+        break;
+      case "2nd Floor":
+        return `${iconBase}/blue-dot.png`;
+        break;
+      case "3rd Floor":
+        return `${iconBase}/green-dot.png`;
+        break;
+      case "4th Floor":
+        return `${iconBase}/orange-dot.png`;
+        break;
+      case "5th Floor":
+        return `${iconBase}/yellow-dot.png`;
+        break;
+      case "6th Floor":
+        return `${iconBase}/pink-dot.png`;
+        break;
+      case "7th Floor":
+        return `${iconBase}/purple-dot.png`;
+        break;
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
-    console.log(defaultCenter);
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -45,6 +73,7 @@ const MapView = ({ uniqueRooms, defaultCenter, infoSetter }) => {
         >
           {uniqueRooms.map((mark) => (
             <Marker
+              icon={iconSetter(mark.room.floor)}
               key={mark._id}
               position={{
                 lat: Number(mark.room.lat),

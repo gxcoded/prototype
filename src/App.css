@@ -24,11 +24,11 @@
     rgba(233, 223, 223, 0.1)
   );
 }
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -147,5 +147,10 @@ a {
 @media (max-width: 1400px) {
   *::-webkit-scrollbar {
     display: unset;
+  }
+}
+@media (max-width: 600px) {
+  form .form-control {
+    min-width: unset !important;
   }
 }

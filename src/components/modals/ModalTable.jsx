@@ -1,21 +1,26 @@
 import React from "react";
 import { Fragment, useEffect, useState } from "react";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const ModalTable = ({
-  data,
+  classStudents,
   onGoing,
   remarksToggler,
   reload,
   currentRoomId,
+  currentLogs,
 }) => {
+  const [filteredStudents, setFilteredStudents] = useState([]);
   const [sortedList, setSortedList] = useState([]);
   const [excuseList, setExcuseList] = useState([]);
   const [url] = useState(process.env.REACT_APP_URL);
   const [api] = useState(process.env.REACT_APP_API_SERVER);
 
   useEffect(() => {
+    console.log("reloaded");
+    console.log(classStudents);
     loadData();
     loadExcuseList();
   }, [reload]);
@@ -25,12 +30,28 @@ const ModalTable = ({
     setExcuseList(list);
   };
   const fetchExcuseList = async () => {
-    const { data } = await axios.post(`${url}/getExcusedStudents`, {
+    const { data } = await axios.post(`${url}/getMeetingExcused`, {
       meeting: onGoing,
     });
 
     console.log(data);
     return data;
+  };
+
+  const filterList = () => {
+    let array = [];
+
+    classStudents.forEach((cs) => {
+      let logged = false;
+      currentLogs.forEach((cl) => {
+        cl.accountScanned._id === cs.student._id && (logged = true);
+      });
+      if (!logged) {
+        console.log("logged");
+        array.push(cs);
+        setSortedList(array.sort(compare));
+      }
+    });
   };
 
   const compare = (current, next) => {
@@ -44,7 +65,7 @@ const ModalTable = ({
   };
 
   const loadData = async () => {
-    setSortedList(data.sort(compare));
+    filterList();
   };
 
   const isExcused = (id) => {

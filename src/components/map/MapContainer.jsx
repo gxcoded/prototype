@@ -17,6 +17,7 @@ const MapContainer = ({
   currentCoords,
   current,
   defaultCoordinates,
+  showHint,
 }) => {
   const [url] = useState(process.env.REACT_APP_URL);
   const [mapAPIKey] = useState(process.env.REACT_APP_MAP_API_KEY);
@@ -97,18 +98,25 @@ const MapContainer = ({
 
   return (
     <div className="mapContainer-container">
-      <div className="mapContainer-main bg-primary">
+      <div className="mapContainer-main rounded-0">
         <div className="mapContainer-left">
           <div className="mapContainer-left-content">
             <div className="hide-map" onClick={() => mapToggler()}>
               <i className="fas fa-times me-2"></i>
               {isEdit ? "CLose" : "CLOSE"}
             </div>
-            <div className="map-instructions">
-              Please Pin Down the possible location of the room by clicking on
-              the map.
-            </div>
-            <div className="location-details border">
+            {showHint ? (
+              <div className="map-instructions">
+                Pin Down the possible location of the room by clicking on the
+                map.
+              </div>
+            ) : (
+              <div className="map-instructions">
+                The mark on the right side shows where the chosen location is
+                pinned.
+              </div>
+            )}
+            <div className="location-details">
               {isEdit ? (
                 <Fragment>
                   <div className="location-details-floor"> {currentFloor}</div>
@@ -120,20 +128,23 @@ const MapContainer = ({
                   <div className="location-details-desc">{description}</div>
                 </Fragment>
               )}
-              <div className="location-save mt-2">
-                <button
-                  onClick={() => saveLocation()}
-                  className="btn btn-primary"
-                >
-                  Save
-                </button>
-              </div>
+              {showHint && (
+                <div className="location-save mt-2">
+                  <button
+                    onClick={() => saveLocation()}
+                    className="btn-sm btn-warning"
+                  >
+                    Save
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="mapContainer-right">
           {isLoaded ? (
             <Map
+              floor={isEdit ? currentFloor : floor}
               defaultCoordinates={defaultCoordinates}
               getCoordinates={getCoordinates}
               isEdit={isEdit}

@@ -2,8 +2,16 @@ import ScannerPop from "./ScannerPop";
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+// classMeeting.css
 
-const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
+const NewMeeting = ({
+  room,
+  onGoing,
+  loadMeeting,
+  modalToggler,
+  currentLogsSetter,
+  defaultRoom,
+}) => {
   const [showScanner, setShowScanner] = useState(false);
   const [rooms, setRooms] = useState([]);
 
@@ -15,7 +23,7 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
   const [showRight, setShowRight] = useState(false);
   const [showSubmit, setShowSubmit] = useState(true);
   const [selectedRoom, setSelectedRoom] = useState(room.defaultRoom);
-  const [roomInfo, setRoomInfo] = useState({});
+  const [roomInfo, setRoomInfo] = useState(defaultRoom);
   const [start, setStart] = useState(room.defaultTimeStart);
   const [currentMeetingId, setCurrentMeetingId] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,11 +33,11 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
   useEffect(() => {
     loadData();
     // console.log(room);
-    console.log(onGoing);
+    // console.log(onGoing);
     // console.log(loadMeeting);
 
     if (checkOngoing()) {
-      console.log(onGoing);
+      // console.log(onGoing);
       setSelectedRoom(onGoing.room._id);
       setStart(onGoing.time);
       setShowRight(true);
@@ -37,9 +45,11 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
       setCurrentMeetingId(onGoing._id);
       setRoomInfo(onGoing.room);
       loadMeetingLogs();
-    } else {
-      currentRoomInfo(room.defaultRoom);
     }
+    // else {
+    //   currentRoomInfo(room.defaultRoom);
+    //   currentRoomInfo(room.defaultRoom);
+    // }
     // setTimeout(() => {
     //   setLoading(false);
     // }, 1000);
@@ -52,6 +62,7 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
   const loadMeetingLogs = async () => {
     const logs = await fetchMeetingLogs();
     setMeetingLogs(logs);
+    currentLogsSetter(logs);
     setStudentLogs(
       logs.filter((l) => l.isVisitor === false && l.isSitIn === false)
     );
@@ -91,8 +102,12 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
 
   const toggleScanner = (e) => {
     e.preventDefault();
+    // console.log(roomInfo);
+    // console.log("selected " + selectedRoom);
     // alert(selectedRoom);
+    // alert(room._id);
     // alert(start);
+
     swal({
       title: "Start Now?",
       buttons: true,
@@ -212,6 +227,7 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
           currentRoomInfo={roomInfo}
           room={room}
           loadMeetingLogs={loadMeetingLogs}
+          meetingLogs={meetingLogs}
         />
       )}
       {loading ? (
@@ -233,8 +249,15 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
                   className="form-control"
                   defaultValue={selectedRoom}
                 >
+                  <option value={selectedRoom} disabled>
+                    {defaultRoom.description}
+                  </option>
                   {rooms.map((list) => (
-                    <option key={list._id} value={list._id}>
+                    <option
+                      key={list._id}
+                      value={list._id}
+                      selected={list._id === selectedRoom}
+                    >
                       {list.description}
                     </option>
                   ))}
@@ -261,7 +284,7 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
                     onClick={() => console.log(selectedRoom)}
                     className="btn btn-custom-red btn-block"
                   >
-                    Start Scanning
+                    Start
                   </button>
                 </div>
               ) : (
@@ -295,7 +318,6 @@ const NewMeeting = ({ room, onGoing, loadMeeting, modalToggler }) => {
         className={`new-meeting-right mx-1 
         }`}
       >
-        <div></div>
         <div className=" new-meeting-logs-right-header d-flex justify-content-between align-items-center">
           <span>Students </span>
           {checkOngoing() && (

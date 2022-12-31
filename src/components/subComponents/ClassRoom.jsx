@@ -6,6 +6,7 @@ import Modal from "../modals/Modal";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const ClassRoom = ({ room, options }) => {
   const [students, setStudents] = useState(false);
@@ -22,10 +23,17 @@ const ClassRoom = ({ room, options }) => {
   const [student, setStudent] = useState("");
   const [reload, setReload] = useState(false);
   const [currentRoomId, setCurrentRoomId] = useState("");
+  const [currentLogs, setCurrentLogs] = useState([]);
 
   useEffect(() => {
     loadStudents();
   }, []);
+
+  const currentLogsSetter = (logs) => {
+    console.log("heere");
+    console.log(logs);
+    setCurrentLogs(logs);
+  };
 
   const loadStudents = async () => {
     const students = await fetchStudentList();
@@ -72,7 +80,13 @@ const ClassRoom = ({ room, options }) => {
   const submitExcuse = async (e) => {
     e.preventDefault();
     if (await excuseSent()) {
-      swal("Done!", "Marked as Excused!", "success");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Marked as Excused",
+        showConfirmButton: false,
+        timer: 1000,
+      });
       setShowRemarks(false);
       setRemarkText("");
       reloader();
@@ -83,6 +97,7 @@ const ClassRoom = ({ room, options }) => {
     const isSent = await sendExcuse();
 
     console.log(isSent);
+    setReload(!reload);
     return isSent;
   };
 
@@ -98,7 +113,9 @@ const ClassRoom = ({ room, options }) => {
 
   const reloader = () => {
     setReload(!reload);
+    loadStudents();
   };
+
   return (
     <div className="class-room-container position-relative">
       {showRemarks && (
@@ -138,6 +155,7 @@ const ClassRoom = ({ room, options }) => {
           room={room}
           modalToggler={modalToggler}
           remarksToggler={remarksToggler}
+          currentLogs={currentLogs}
         />
       )}
       <div className="class-room-header ">
@@ -200,7 +218,13 @@ const ClassRoom = ({ room, options }) => {
       </div>
       <div className="class-room-main">
         {students && <ClassStudents room={room} />}
-        {meetings && <ClassMeetings modalToggler={modalToggler} room={room} />}
+        {meetings && (
+          <ClassMeetings
+            currentLogsSetter={currentLogsSetter}
+            modalToggler={modalToggler}
+            room={room}
+          />
+        )}
         {attendance && <Attendance room={room} />}
       </div>
     </div>

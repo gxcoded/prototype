@@ -154,7 +154,7 @@ const StaffGuestScan = ({ accountInfo, assignedRoom }) => {
           setManual(true);
         }
       } else {
-        swal({ text: "Please Select a room", icon: "warning" });
+        swal({ text: "Please Select Location", icon: "warning" });
       }
     }
   };
@@ -415,15 +415,15 @@ const StaffGuestScan = ({ accountInfo, assignedRoom }) => {
                 <div className="current-room-name">
                   {room ? selectedRoom.description : "Please Select"}
                 </div>
-                <div className="current-room-label">Room</div>
+                <div className="current-room-label">Location</div>
               </div>
               <div className=" right-select-lower ">
                 <div>
                   <div className="label-select">
-                    <i className="me-2 fas fa-cog"></i>Set Room
+                    <i className="me-2 fas fa-cog"></i>Set Location
                   </div>
                   <div className=" mt-3">
-                    <label>Select Room</label>
+                    <label>Select Location</label>
                     <select
                       onChange={changeRoom}
                       defaultValue={room}
@@ -440,12 +440,12 @@ const StaffGuestScan = ({ accountInfo, assignedRoom }) => {
                     </select>
                   </div>
                   <div className="mt-3 room-search-tab">
-                    <label>Search Room</label>
+                    <label>Search Location</label>
                     <input
                       onChange={(e) => setSearchValue(e.target.value)}
                       value={searchValue}
                       onKeyUp={(e) => searchRoom(e)}
-                      placeholder="Room Name"
+                      placeholder="Description"
                       type="search"
                       className="form-control search-control rounded"
                       aria-label="Search"

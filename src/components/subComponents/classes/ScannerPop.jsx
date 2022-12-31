@@ -4,6 +4,7 @@ import { QrReader } from "react-qr-reader";
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const ScannerPop = ({
   hideScanner,
@@ -11,6 +12,7 @@ const ScannerPop = ({
   room,
   currentMeetingId,
   loadMeetingLogs,
+  meetingLogs,
 }) => {
   const [url] = useState(process.env.REACT_APP_URL);
   const [displayResult, setDisplayResult] = useState(false);
@@ -24,7 +26,6 @@ const ScannerPop = ({
 
   useEffect(() => {
     dataLoader();
-    console.log(currentRoomInfo);
     loadLogs();
   }, []);
 
@@ -86,7 +87,7 @@ const ScannerPop = ({
   };
 
   const saveStudentLog = async (id) => {
-    alert(currentMeetingId);
+    // alert(currentMeetingId);
     const { data } = await axios.post(`${url}/addMeetingLog`, {
       campus: room.campus,
       room: currentRoomInfo._id,
@@ -98,13 +99,17 @@ const ScannerPop = ({
     if (data) {
       setDisplayResult(false);
       loadMeetingLogs();
-      swal("Added to Logs", {
+      Swal.fire({
+        position: "top-end",
         icon: "success",
+        title: "Added",
+        showConfirmButton: false,
+        timer: 1500,
       });
     }
   };
   const addSeatIn = async (id) => {
-    alert(currentMeetingId);
+    // alert(currentMeetingId);
     const { data } = await axios.post(`${url}/addMeetingSitIn`, {
       campus: room.campus,
       room: currentRoomInfo._id,
@@ -115,13 +120,17 @@ const ScannerPop = ({
     if (data) {
       setDisplayResult(false);
       loadMeetingLogs();
-      swal("Added to Logs", {
+      Swal.fire({
+        position: "top-end",
         icon: "success",
+        title: "Added",
+        showConfirmButton: false,
+        timer: 1500,
       });
     }
   };
   const addGuest = async (id) => {
-    alert(currentMeetingId);
+    // alert(currentMeetingId);
     const { data } = await axios.post(`${url}/addMeetingGuest`, {
       campus: room.campus,
       room: currentRoomInfo._id,
@@ -132,8 +141,12 @@ const ScannerPop = ({
     if (data) {
       setDisplayResult(false);
       loadMeetingLogs();
-      swal("Added to Logs", {
+      Swal.fire({
+        position: "top-end",
         icon: "success",
+        title: "Added",
+        showConfirmButton: false,
+        timer: 1500,
       });
     }
   };
@@ -155,7 +168,7 @@ const ScannerPop = ({
     console.log(logs);
     let exist = false;
 
-    logs.forEach((l) => {
+    meetingLogs.forEach((l) => {
       if (l.accountScanned._id === id) {
         exist = true;
       }
@@ -220,14 +233,16 @@ const ScannerPop = ({
                           >
                             Cancel<i className="ms-1 fas fa-ban"></i>
                           </button>
-                          <button
-                            onClick={() => {
-                              saveStudentLog(details._id);
-                            }}
-                            className="shadow btn-sm btn-primary"
-                          >
-                            Confirm<i className="ms-1 far fa-thumbs-up"></i>
-                          </button>
+                          {details.allowed && (
+                            <button
+                              onClick={() => {
+                                saveStudentLog(details._id);
+                              }}
+                              className="shadow btn-sm btn-primary"
+                            >
+                              Confirm<i className="ms-1 far fa-thumbs-up"></i>
+                            </button>
+                          )}
                         </div>
                       ) : (
                         <div className="d-flex justify-content-center mt-3">
@@ -237,7 +252,7 @@ const ScannerPop = ({
                             }}
                             className="shadow btn btn-custom-red"
                           >
-                            Already Scanned<i className="ms-1 fas fa-ban"></i>
+                            Already Added<i className="ms-1 fas fa-ban"></i>
                           </button>
                         </div>
                       )}
@@ -254,24 +269,30 @@ const ScannerPop = ({
                           >
                             Cancel<i className="ms-1 fas fa-ban"></i>
                           </button>
-                          {details.role._id === "62cb91ba2c5804049b716d49" ? (
-                            <button
-                              onClick={() => {
-                                addSeatIn(details._id);
-                              }}
-                              className="shadow btn-sm btn-warning"
-                            >
-                              Seat In<i className="ms-1 far fa-thumbs-up"></i>
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => {
-                                addGuest(details._id);
-                              }}
-                              className="shadow btn-sm btn-success"
-                            >
-                              Guest<i className="ms-1 far fa-thumbs-up"></i>
-                            </button>
+                          {details.allowed && (
+                            <Fragment>
+                              {details.role._id ===
+                              "62cb91ba2c5804049b716d49" ? (
+                                <button
+                                  onClick={() => {
+                                    addSeatIn(details._id);
+                                  }}
+                                  className="shadow btn-sm btn-warning"
+                                >
+                                  Seat In
+                                  <i className="ms-1 far fa-thumbs-up"></i>
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    addGuest(details._id);
+                                  }}
+                                  className="shadow btn-sm btn-success"
+                                >
+                                  Guest<i className="ms-1 far fa-thumbs-up"></i>
+                                </button>
+                              )}
+                            </Fragment>
                           )}
                         </div>
                       ) : (
@@ -282,7 +303,7 @@ const ScannerPop = ({
                             }}
                             className="shadow btn btn-custom-red"
                           >
-                            Already Scanned<i className="ms-1 fas fa-ban"></i>
+                            Already Added<i className="ms-1 fas fa-ban"></i>
                           </button>
                         </div>
                       )}
@@ -324,7 +345,7 @@ const ScannerPop = ({
                     setScan(false);
                     setManual(true);
                   }}
-                  className="manual-switch "
+                  className="manual-switch"
                 >
                   <i className="fas fa-sync me-2"></i> Manual Log
                 </div>
@@ -338,13 +359,15 @@ const ScannerPop = ({
                 onError={handleError}
                 onScan={handleScan}
                 onResult={showResult}
+                key={"environment"}
+                constraints={{ facingMode: "environment" }}
               />
             </Fragment>
           )}
           {manual && (
             <Fragment>
-              <div className="manual-frame-container">
-                <div className="manual-log">
+              <div className="manual-frame-container border">
+                <div className="manual-log-class">
                   <form onSubmit={submitManual}>
                     <div className="form-group">
                       <div className="manual-label">

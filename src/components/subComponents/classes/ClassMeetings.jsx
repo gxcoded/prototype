@@ -4,21 +4,44 @@ import MeetingLogs from "./MeetingLogs";
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 
-const ClassMeetings = ({ room, modalToggler }) => {
+const ClassMeetings = ({ room, modalToggler, currentLogsSetter }) => {
   const [newMeeting, setNewMeeting] = useState(false);
   const [meetingLogs, setMeetingLogs] = useState(false);
   const [onGoing, setOnGoing] = useState({});
   const [url] = useState(process.env.REACT_APP_URL);
   const [loading, setLoading] = useState(true);
+  // const [rooms, setRooms] = useState([]);
+  const [defaultRoom, setDefaultRoom] = useState({});
 
   useEffect(() => {
     loadMeeting();
     setNewMeeting(true);
+    loadData(room.defaultRoom);
 
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
+
+  const loadData = async (id) => {
+    console.log(typeof id);
+    const roomList = await fetchRooms();
+    console.log(roomList);
+    roomList.forEach((r) => {
+      if (r._id === id) {
+        console.log("found");
+        setDefaultRoom(r);
+      }
+    });
+    // setRooms(roomList);
+  };
+
+  const fetchRooms = async () => {
+    const { data } = await axios.post(`${url}/classRoomList`, {
+      campus: room.campus,
+    });
+    return data;
+  };
 
   const loadMeeting = async () => {
     const meet = await getMeeting();
@@ -79,10 +102,12 @@ const ClassMeetings = ({ room, modalToggler }) => {
           <div className="class-meeting-main">
             {newMeeting && (
               <NewMeeting
+                defaultRoom={defaultRoom}
                 room={room}
                 onGoing={onGoing}
                 loadMeeting={loadMeeting}
                 modalToggler={modalToggler}
+                currentLogsSetter={currentLogsSetter}
               />
             )}
             {meetingLogs && <MeetingLogs room={room} />}

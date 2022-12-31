@@ -151,7 +151,7 @@ const SchoolAdminDashboard = ({ accountInfo }) => {
                 </div>
               </div>
             </div>
-            <div className="admin-dashboard-box">
+            {/* <div className="admin-dashboard-box">
               <div className="admin-dashboard-box-left">
                 <i className="fas fa-city"></i>
               </div>
@@ -161,13 +161,13 @@ const SchoolAdminDashboard = ({ accountInfo }) => {
                   {buildingList.length}
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="admin-dashboard-box">
               <div className="admin-dashboard-box-left">
                 <i className="fas fa-puzzle-piece"></i>
               </div>
               <div className="admin-dashboard-box-right">
-                <div className="admin-dashboard-box-right-label">Rooms</div>
+                <div className="admin-dashboard-box-right-label">Locations</div>
                 <div className="admin-dashboard-box-right-count">
                   {roomList.length}
                 </div>

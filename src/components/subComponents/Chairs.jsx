@@ -171,7 +171,7 @@ const Chairs = ({ accountInfo }) => {
         <div className="table-list staff-table py-5">
           <div className="table-header px-2 mb-5 d-flex justify-content-between align-items-center">
             <div className="table-header-text fw-bold">Chairpersons</div>
-            <div>
+            {/* <div>
               <div className="input-group">
                 <input
                   placeholder="Course"
@@ -184,7 +184,7 @@ const Chairs = ({ accountInfo }) => {
                   Search
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
           <table className="campus-table table table-striped">
             <thead>

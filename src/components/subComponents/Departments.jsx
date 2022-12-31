@@ -12,6 +12,7 @@ const Departments = ({ campus }) => {
   const [popUpHide, setPopUpHide] = useState(true);
   const [editDescription, setEditDescription] = useState("");
   const [currentId, setCurrentId] = useState("");
+  const slide = document.querySelector("#slideTrigger");
 
   useEffect(() => {
     loadData();
@@ -153,7 +154,8 @@ const Departments = ({ campus }) => {
           </form>
         </div>
       </div>
-      <div className="staff-list-title">
+      <div className="staff-list-title" id="top">
+        <a href="#top" id="slideTrigger" style={{ display: "none" }}></a>
         <i className="fas fa-fax me-3"></i>Manage Departments
       </div>
       <div className="campus-staff-main">
@@ -189,7 +191,7 @@ const Departments = ({ campus }) => {
           </div>
         </div>
         <div className="table-list staff-table py-5">
-          <div className="table-header px-2 mb-5 d-flex justify-content-between align-items-center">
+          <div className="table-header  px-2 mb-5 d-flex justify-content-between align-items-center">
             <div className="table-header-text fw-bold">Departments</div>
             <div>
               <div className="input-group">
@@ -252,7 +254,10 @@ const Departments = ({ campus }) => {
                     <td>
                       <div className="table-options justify-content-center">
                         <span
-                          onClick={(e) => editData(list.description, list._id)}
+                          onClick={(e) => {
+                            editData(list.description, list._id);
+                            slide.click();
+                          }}
                           className="option-edit me-3"
                         >
                           <i className="fas fa-edit"></i>

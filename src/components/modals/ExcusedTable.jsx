@@ -1,6 +1,7 @@
 import React from "react";
 import { Fragment, useEffect, useState } from "react";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const ExcusedTable = ({ onGoing, reload }) => {
@@ -10,6 +11,7 @@ const ExcusedTable = ({ onGoing, reload }) => {
   const [api] = useState(process.env.REACT_APP_API_SERVER);
 
   useEffect(() => {
+    console.log(onGoing);
     loadExcuseList();
     loadData();
   }, [reload]);
@@ -18,8 +20,9 @@ const ExcusedTable = ({ onGoing, reload }) => {
     const list = await fetchExcuseList();
     setExcuseList(list);
   };
+
   const fetchExcuseList = async () => {
-    const { data } = await axios.post(`${url}/getExcusedStudents`, {
+    const { data } = await axios.post(`${url}/getMeetingExcused`, {
       meeting: onGoing,
     });
 
@@ -51,8 +54,12 @@ const ExcusedTable = ({ onGoing, reload }) => {
     }).then((willDelete) => {
       if (willDelete) {
         if (isRemoved(id)) {
-          swal("Removed", {
+          Swal.fire({
+            position: "top-end",
             icon: "success",
+            title: "Removed",
+            showConfirmButton: false,
+            timer: 1000,
           });
           loadExcuseList();
         }
