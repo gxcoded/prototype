@@ -175,6 +175,8 @@ const Interactions = ({
 
   const loadLastLog = async () => {
     const last = await fetchLastLog();
+    console.log(last);
+    console.log(Date.now());
     setLastVisit(last);
     console.log(last._id);
   };
@@ -183,6 +185,7 @@ const Interactions = ({
     const { data } = await axios.post(`${url}/getLastLog`, {
       id: current._id,
     });
+    console.log(data);
     return data;
   };
 

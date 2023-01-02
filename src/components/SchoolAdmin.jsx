@@ -351,7 +351,7 @@ const SchoolAdmin = () => {
                           <i className="fas fa-puzzle-piece me-3"></i>Locations
                         </div>
                       </li>
-                      <li className="list-group-item px-4 border-0">
+                      {/* <li className="list-group-item px-4 border-0">
                         <div
                           onClick={(e) => {
                             toggleActive(e);
@@ -362,7 +362,7 @@ const SchoolAdmin = () => {
                           <i className="fas fa-bell me-3"></i>Notification
                           Message
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                   )}
                 </div>

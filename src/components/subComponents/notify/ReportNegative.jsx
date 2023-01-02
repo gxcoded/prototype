@@ -79,40 +79,36 @@ const ReportPositive = ({ accountInfo }) => {
   const sendNow = async () => {
     if (selectedType) {
       if (file) {
-        if (message) {
-          const formData = new FormData();
-          formData.append("file", file);
-          formData.append("campus", accountInfo.campus._id);
-          formData.append("accountOwner", accountInfo._id);
-          formData.append("testType", selectedType);
-          formData.append("dateTested", new Date(dateTested).getTime());
-          formData.append("resultDate", new Date(resultDate).getTime());
-          formData.append("dateSent", Date.now().toString());
-          formData.append("message", message);
-          formData.append("adminNumber", adminInfo.phoneNumber);
-          formData.append("adminEmail", adminInfo.email);
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("campus", accountInfo.campus._id);
+        formData.append("accountOwner", accountInfo._id);
+        formData.append("testType", selectedType);
+        formData.append("dateTested", new Date(dateTested).getTime());
+        formData.append("resultDate", new Date(resultDate).getTime());
+        formData.append("dateSent", Date.now().toString());
+        formData.append("message", message);
+        formData.append("adminNumber", adminInfo.phoneNumber);
+        formData.append("adminEmail", adminInfo.email);
 
-          try {
-            const res = await axios.post(`${url}/reportNegative`, formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            });
+        try {
+          const res = await axios.post(`${url}/reportNegative`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
 
-            swal({
-              title: "Sent!",
-              text: "Notification was sent to School Admin",
-              icon: "success",
-            });
+          swal({
+            title: "Sent!",
+            text: "Report Has Been Sent",
+            icon: "success",
+          });
 
-            setMessage("");
-            setFile("");
-            document.querySelector("#preview").src = DefaultImage;
-          } catch (error) {
-            console.log(error);
-          }
-        } else {
-          swal("Please Type a Message!");
+          setMessage("");
+          setFile("");
+          document.querySelector("#preview").src = DefaultImage;
+        } catch (error) {
+          console.log(error);
         }
       } else {
         swal("Please Include an Image of your test Result!");
@@ -202,7 +198,7 @@ const ReportPositive = ({ accountInfo }) => {
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type Custom Message Here"
+                    placeholder="Type Custom Message Remarks"
                     className="form-control positive-text-area m-0"
                     required
                     // minLength={"20"}

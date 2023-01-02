@@ -83,3 +83,15 @@
 .hide-preview {
   margin-top: 0;
 }
+@media (max-width: 750px) {
+  .custom-msg-header {
+    font-size: 0.8rem;
+  }
+  .notification-main-section-right {
+    width: 100%;
+    padding: 0;
+  }
+  .notification-main-section-left {
+    display: none;
+  }
+}

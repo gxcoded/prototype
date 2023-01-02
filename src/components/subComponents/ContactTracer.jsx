@@ -420,7 +420,10 @@ const ContactTracer = ({ campus, showMsgProof }) => {
             </div>
           </div> */}
 
-              <div className="search-result-table" id="tableDisplay">
+              <div
+                className="search-result-table overflow-auto"
+                id="tableDisplay"
+              >
                 {showSearchResult && (
                   <Fragment>
                     {searchResult.length > 0 ? (
@@ -464,6 +467,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
                     showInteractions={showInteractions}
                     api={api}
                     roles={roles}
+                    loadMessages={loadMessages}
                   />
                 )}
                 {showNegativeReports && (

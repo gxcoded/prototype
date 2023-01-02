@@ -8,6 +8,7 @@ const NewThreadsTable = ({
   roles,
   showMsgProof,
   campus,
+  loadMessages,
 }) => {
   const [cases, setCases] = useState([]);
   const [url] = useState(process.env.REACT_APP_URL);
@@ -42,8 +43,21 @@ const NewThreadsTable = ({
   };
 
   const fetchCases = async () => {
-    const { data } = await axios.post(`${url}/getAllUntracedCase`, {
+    const { data } = await axios.post(`${url}/getAllUnseenCase`, {
       campus,
+    });
+
+    return data;
+  };
+
+  const seen = async (id) => {
+    const isSeen = await setAsSeen(id);
+    isSeen && loadMessages();
+    console.log(isSeen);
+  };
+  const setAsSeen = async (id) => {
+    const { data } = await axios.post(`${url}/setAsSeen`, {
+      id,
     });
 
     return data;
@@ -102,7 +116,10 @@ const NewThreadsTable = ({
             </td>
             <td className="text-center">
               <button
-                onClick={() => showInteractions(list.accountOwner, list._id)}
+                onClick={() => {
+                  showInteractions(list.accountOwner, list._id);
+                  seen(list._id);
+                }}
                 className="btn btn-primary"
               >
                 Details

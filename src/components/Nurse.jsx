@@ -8,6 +8,7 @@ import BounceLoader from "react-spinners/BounceLoader";
 import LoggedOut from "./LoggedOut";
 import Messages from "./subComponents/notify/Messages";
 import MapContainer from "./map/MapContainer";
+import NotificationMessage from "./subComponents/NotificationMessage";
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import Chats from "./subComponents/Chats";
@@ -282,10 +283,21 @@ const SchoolAdmin = () => {
                           <i className="fab fa-rocketchat me-3"></i>Chats{" "}
                         </span>
                         {newChatCount > 0 && (
-                          <span className="chat-count-display border">
+                          <span className="chat-count-display border text-warning">
                             {newChatCount}
                           </span>
                         )}
+                      </div>
+                    </li>
+                    <li className="list-group-item px-4 border-0">
+                      <div
+                        onClick={(e) => {
+                          toggleActive(e);
+                          setNotification(true);
+                        }}
+                        className="side-button"
+                      >
+                        <i className="fas fa-bell me-3"></i>Notification Message
                       </div>
                     </li>
                   </ul>
@@ -418,6 +430,9 @@ const SchoolAdmin = () => {
 
                   {credentials && <CredentialsPage accountInfo={accountInfo} />}
                   {chat && <Chats accountInfo={accountInfo} />}
+                  {notification && (
+                    <NotificationMessage campus={accountInfo.campus._id} />
+                  )}
                 </div>
               </div>
             </Fragment>

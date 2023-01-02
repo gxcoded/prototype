@@ -27,6 +27,7 @@ const TraceAll = ({
   const [displayInfo, setDisplayInfo] = useState([]);
   const [allowed, setAllowed] = useState(false);
   const [isTraced, setIsTraced] = useState(false);
+  const [notified, setNotified] = useState({});
 
   const [logs, setLogs] = useState([]);
   const [defaultStart, setDefaultStart] = useState(
@@ -45,15 +46,16 @@ const TraceAll = ({
 
   useEffect(() => {
     contactTraced();
-
+    loadNotified();
     isAllowed(current._id);
     const gap = Math.floor(
       (Number(customDate) - Number(defaultTest)) / 86400000
     );
-    let limit = gap + 14;
 
-    if (limit < 14) {
-      limit = 14;
+    let limit = gap + 7;
+
+    if (limit < 7) {
+      limit = 7;
     }
     const lastStamp = limit * 86400000;
     const lastDate = Number(customDate) - Number(lastStamp);
@@ -71,11 +73,18 @@ const TraceAll = ({
     setDisplayInfo(array);
   };
 
+  const isGreater = () => {
+    if (Number(customDate) > Number(defaultTest)) {
+      return Number(customDate);
+    }
+
+    return Number(defaultTest);
+  };
   const loadDates = (limit) => {
     let array = [];
 
     // let now = Number(new Date(customDate).getTime());
-    let now = Number(customDate);
+    let now = isGreater();
     // console.log(now);
     for (let i = 0; i < limit; i++) {
       let day = {
@@ -244,6 +253,32 @@ const TraceAll = ({
 
   // notify contacts
 
+  const isNotified = async () => {
+    const isUpdated = await setAsNotified();
+    return isUpdated;
+  };
+  const setAsNotified = async () => {
+    const { data } = await axios.post(`${url}/setAsNotified`, {
+      report: proofId,
+    });
+
+    return data;
+  };
+
+  const loadNotified = async () => {
+    console.log(proofId);
+    const data = await checkNotified();
+    setNotified(data);
+  };
+  const checkNotified = async () => {
+    const { data } = await axios.post(`${url}/checkNotified`, {
+      report: proofId,
+    });
+
+    console.log(data);
+    return data;
+  };
+
   const getAllContacts = () => {
     let array = [];
 
@@ -260,27 +295,38 @@ const TraceAll = ({
   const notifyContacts = () => {
     uniqueDataContacts();
     let allContacts = getAllContacts();
-    if (uniqueContacts.length > 0) {
+    if (Object.keys(notified).length > 0) {
       swal({
-        title: "Notify Close Contacts?",
+        title: "Notify Status",
         text:
-          `This will also mark this case as Traced.` + uniqueContacts.length,
-        buttons: true,
-      }).then((willNotify) => {
-        if (willNotify) {
-          if (notificationSent(allContacts)) {
-            traceUpdated(true);
-            swal("Done", {
-              icon: "success",
-            });
-            contactTraced();
-          }
-        }
+          `Contacts are Already Notified On ` +
+          dateFormatter(notified.dateNotified),
       });
     } else {
-      swal({
-        text: `No close Contacts Found`,
-      });
+      if (uniqueContacts.length > 0) {
+        swal({
+          title: "Notify Close Contacts?",
+          text:
+            `This will also mark this case as Traced.` + uniqueContacts.length,
+          buttons: true,
+        }).then((willNotify) => {
+          if (willNotify) {
+            if (notificationSent(allContacts)) {
+              traceUpdated(true);
+              swal("Done", {
+                icon: "success",
+              });
+              contactTraced();
+              isNotified();
+              loadNotified();
+            }
+          }
+        });
+      } else {
+        swal({
+          text: `No close Contacts Found`,
+        });
+      }
     }
   };
 
@@ -463,8 +509,11 @@ const TraceAll = ({
       {mapView && (
         <div className="trace-all-map-view rounded-0">
           <div className="trace-all-map-view-left">
-            <div onClick={() => mapViewToggler()} className="map-view-closer">
-              Close
+            <div
+              onClick={() => mapViewToggler()}
+              className="map-view-closer bg-danger text-center"
+            >
+              Close Map
             </div>
             <div className="trace-all-map-view-left-main">
               <div className="trace-all-map-info">
@@ -516,7 +565,7 @@ const TraceAll = ({
         </span>
       </div>
       <div className="trace-all-main">
-        <div className="trace-all-main-header">
+        <div className="trace-all-main-header border">
           <div className="trace-all-main-profile">
             <div className="current-img-container">
               <img
@@ -592,7 +641,7 @@ const TraceAll = ({
               Notify Close Contacts
             </div>
           </div>
-          <div className="trace-all-main-date tam-report text-center">
+          <div className="trace-all-main-date tam-report text-center hide-icon">
             <div
               onClick={() => {
                 uniqueData();
@@ -600,7 +649,7 @@ const TraceAll = ({
               }}
               className="s-i-m-date-content"
             >
-              <i className="fas fa-map-marked text-success"></i>
+              <i className="fas fa-map-marked text-success "></i>
               Map View
             </div>
           </div>
@@ -653,7 +702,7 @@ const TraceAll = ({
           </div>
           <div className="trace-all-info-dates-right">
             <div className="trace-all-date-guide">
-              Date traced is from last campus visit plus 14 days from the date
+              Date traced is from last campus visit plus 7 days from the date
               tested.
             </div>
           </div>
@@ -673,7 +722,7 @@ const TraceAll = ({
                     {checkVisited(d.numeric).map((room) => (
                       <div
                         key={Math.floor(Math.random() * 1000000)}
-                        className="visited-room-details border"
+                        className="visited-room-details border  overflow-auto"
                       >
                         <div className="vrd-header">
                           {room.room.description}

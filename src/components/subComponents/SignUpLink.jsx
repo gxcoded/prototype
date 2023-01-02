@@ -55,6 +55,8 @@ const SignUpLink = ({ campusId, type }) => {
 
     if (data) {
       swal("Email Sent!", { icon: "success" });
+    } else {
+      swal("Email is not Sent!", { icon: "error" });
     }
     setIdNumber("");
     setEmail("");

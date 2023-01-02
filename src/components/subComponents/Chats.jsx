@@ -157,14 +157,14 @@ const Chats = ({ accountInfo }) => {
                     toggleActive(e.target);
                   }}
                   key={thread._id}
-                  className="chat-thread"
+                  className="chat-thread chat-thread-top"
                 >
                   <img
                     className="chat-thread-img"
                     src={`${api}/${thread.sender.image}`}
                     alt="chat-thread-img"
                   />
-                  <div className="chat-thread-details">
+                  <div className="chat-thread-details chat-thread-details-left">
                     <div className="chat-thread-name">{`${thread.sender.firstName} ${thread.sender.lastName}`}</div>
                     <div className="chat-thread-date">
                       {dateFormatter(thread.dateSent)}
@@ -237,6 +237,7 @@ const Chats = ({ accountInfo }) => {
                     placeholder="Type Message Here"
                     type="text"
                     className="form-control chat-input-box-section"
+                    style={{ minWidth: "unset" }}
                   />
                   <button
                     onClick={() => {
@@ -251,7 +252,7 @@ const Chats = ({ accountInfo }) => {
               </div>
             </Fragment>
           ) : (
-            <div className="click-thread">
+            <div className="click-thread mt-4">
               <i className="far fa-comments"></i>
               <span className="click-thread-text">
                 Click Thread to show message...
