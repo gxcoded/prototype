@@ -302,7 +302,7 @@ const SchoolAdmin = () => {
                           }}
                           className="side-button"
                         >
-                          <i className="fas fa-book-reader me-3"></i>Courses
+                          <i className="fas fa-book-reader me-3"></i>Degrees
                         </div>
                       </li>
                       <li className="list-group-item px-4 border-0">
@@ -376,7 +376,7 @@ const SchoolAdmin = () => {
                       <i className="fas fa-sliders-h me-2"></i>Account
                       Management
                     </div>
-                    <div className="collapse-text">
+                    <div className="ms-2 collapse-text">
                       {staffControl ? (
                         <i className="fas fa-angle-up"></i>
                       ) : (
@@ -386,18 +386,6 @@ const SchoolAdmin = () => {
                   </div>
                   {staffControl && (
                     <ul className="list-group list-group-light">
-                      <li className="list-group-item px-4 border-0">
-                        <div
-                          onClick={(e) => {
-                            toggleActive(e);
-                            setChairs(true);
-                          }}
-                          className="side-button"
-                        >
-                          <i className="fas fa-user-tag me-3"></i>
-                          Chairpersons
-                        </div>
-                      </li>
                       <li className="list-group-item px-4 border-0">
                         <div
                           onClick={(e) => {
@@ -430,6 +418,18 @@ const SchoolAdmin = () => {
                         >
                           <i className="fab fa-trello me-3"></i>Designate Scan
                           Location
+                        </div>
+                      </li>
+                      <li className="list-group-item px-4 border-0">
+                        <div
+                          onClick={(e) => {
+                            toggleActive(e);
+                            setChairs(true);
+                          }}
+                          className="side-button"
+                        >
+                          <i className="fas fa-user-tag me-3"></i>
+                          Person to Manage Courses
                         </div>
                       </li>
                     </ul>

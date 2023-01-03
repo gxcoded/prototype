@@ -86,7 +86,7 @@ const Verification = () => {
                   </div>
                 </form>
                 <div className="verify-texts mt-3">
-                  We sent a 6 digit verification code on the email address you
+                  We sent a 6 digit verification code on the mobile number you
                   provided. Please enter the code here to continue your
                   registration.
                 </div>

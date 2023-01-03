@@ -33,7 +33,7 @@ const Teaching = () => {
   const [walkIn, setWalkIn] = useState(false);
   const [isChair, setIsChair] = useState(false);
   const [chairInfo, setChairInfo] = useState({});
-  const [chairOptions, setChairOptions] = useState(false);
+  const [chairOptions, setChairOptions] = useState(true);
   const [sections, setSections] = useState(false);
   const [url] = useState(process.env.REACT_APP_URL);
   const [assignedRoom] = useState({});
@@ -215,19 +215,19 @@ const Teaching = () => {
                   <div className="links-bottom mt-2">
                     <hr />
                     <div
-                      onClick={() => setChairOptions(!chairOptions)}
+                      // onClick={() => setChairOptions(!chairOptions)}
                       className="sub-label px-5 collapsible"
                     >
                       <div className="collapse-text">
-                        <i className="fas fa-sliders-h me-3"></i>Chair Controls
+                        <i className="fas fa-sliders-h me-3"></i>Manage Courses
                       </div>
-                      <div className="collapse-text">
+                      {/* <div className="collapse-text">
                         {chairOptions ? (
                           <i className="fas fa-angle-up"></i>
                         ) : (
                           <i className="fas fa-angle-down"></i>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                     {chairOptions && (
                       <ul className="list-group list-group-light">
@@ -251,7 +251,7 @@ const Teaching = () => {
                             }}
                             className="side-button"
                           >
-                            <i className="fas fa-cube me-3"></i>Subjects
+                            <i className="fas fa-cube me-3"></i>Courses
                           </div>
                         </li>
                       </ul>

@@ -62,7 +62,7 @@ const Chairs = ({ accountInfo }) => {
   const assignMe = async (id) => {
     swal({
       title: "Assign",
-      text: "Assign As Chairperson",
+      text: "Assign?",
       buttons: true,
     }).then(async (yes) => {
       if (yes) {
@@ -87,7 +87,7 @@ const Chairs = ({ accountInfo }) => {
   const unAssign = async (id) => {
     swal({
       title: "Are you sure?",
-      text: "Unassign Chairperson",
+      text: "Unassign this Account",
       buttons: true,
       dangerMode: true,
     }).then(async (yes) => {
@@ -165,7 +165,7 @@ const Chairs = ({ accountInfo }) => {
       )}
       <div className="chair-header">
         <i className="fas fa-user-tag me-3 "></i>
-        <div className="header-title">Manage Chairpersons</div>
+        <div className="header-title">Person to Manage Courses</div>
       </div>{" "}
       <div className="campus-staff-main">
         <div className="table-list staff-table py-5">
@@ -190,7 +190,7 @@ const Chairs = ({ accountInfo }) => {
             <thead>
               <tr>
                 <th className="fw-bold" scope="col">
-                  Course
+                  Degree
                 </th>
                 <th className="fw-bold" scope="col">
                   Img

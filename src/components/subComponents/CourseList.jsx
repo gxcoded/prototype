@@ -132,17 +132,17 @@ const CourseList = ({ accountInfo }) => {
       </div>
       <div className="staff-list-title" id="top">
         <a href="#top" id="slideTrigger" style={{ display: "none" }}></a>
-        <i className="fas fa-book-reader me-3"></i>Manage Courses
+        <i className="fas fa-book-reader me-3"></i>Manage Degrees
       </div>
       <div className="campus-staff-main">
         <div className="list-top-controls">
           <div className="list-counter-box">
             <div className="list-counter">{courseList.length}</div>
-            <div className="list-counter-label">Total Courses</div>
+            <div className="list-counter-label">Total Degrees</div>
           </div>
           <div className="list-filter-controls">
             <div className="controls-title">
-              <i className="me-2 fas fa-plus"></i>Add Course
+              <i className="me-2 fas fa-plus"></i>Add Degree
             </div>
             <div className="form-inputs">
               <div className="form-group">
@@ -167,7 +167,7 @@ const CourseList = ({ accountInfo }) => {
             <thead>
               <tr>
                 <th className="fw-bold" scope="col">
-                  Course Description
+                  Degree Description
                 </th>
                 <th className="fw-bold" scope="col">
                   Available
