@@ -23,7 +23,7 @@ const SideDecoration = () => {
         </div>
         <div className="back-btn-section">
           <p>
-            <Link to="/signOptions">
+            <Link to="/login">
               <i className="fas fa-arrow-left me-2"></i>Go Back
             </Link>
           </p>

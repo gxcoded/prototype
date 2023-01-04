@@ -298,7 +298,11 @@ const ReportHistory = ({ accountInfo }) => {
                   </div>
                 </div>
                 <hr />
-                <div className="sent-message-text">{msg.message}</div>
+                {msg.message.length > 0 ? (
+                  <div className="sent-message-text">{msg.message}</div>
+                ) : (
+                  <div className="sent-message-text">{"No remarks"}</div>
+                )}
                 {/* <div className="sent-message-reply-section">
                   {msg.reply.length > 0 ? (
                     <div className="admin-reply">

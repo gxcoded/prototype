@@ -1,14 +1,26 @@
 import { QRCode } from "react-qrcode-logo";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 import Image from "../assets/images/psuLogo.png";
 import "./subComponents/subCss/QrCodeDisplay.css";
 
 const QrCodeDisplay = ({ value }) => {
   const download = async () => {
-    swal("Download QR-Code ?").then((value) => {
-      value && saveCanvas();
+    Swal.fire({
+      text: "Download Qr Code?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        saveCanvas();
+      }
     });
   };
+
   const saveCanvas = () => {
     const canvas = document.querySelector("#qrCodeDownload");
     let canvasUrl = canvas.toDataURL();

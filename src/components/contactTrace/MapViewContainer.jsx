@@ -13,7 +13,7 @@ const MapViewContainer = ({ uniqueRooms, defaultCenter, infoSetter }) => {
   });
 
   return (
-    <div className="map-view-container-main">
+    <div className="map-view-container-main ">
       {isLoaded ? (
         <MapView
           infoSetter={infoSetter}

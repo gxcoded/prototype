@@ -2,6 +2,8 @@ import "./TraceAll.css";
 import { Fragment, useEffect, useState } from "react";
 // import InteractionLoop from "./InteractionLoop";
 import MapViewContainer from "./MapViewContainer";
+import ContactList from "../modals/ContactList";
+import NotifiedList from "../modals/NotifiedList";
 import swal from "sweetalert";
 import axios from "axios";
 const TraceAll = ({
@@ -28,6 +30,7 @@ const TraceAll = ({
   const [allowed, setAllowed] = useState(false);
   const [isTraced, setIsTraced] = useState(false);
   const [notified, setNotified] = useState({});
+  const [allData, setAllData] = useState([]);
 
   const [logs, setLogs] = useState([]);
   const [defaultStart, setDefaultStart] = useState(
@@ -39,6 +42,8 @@ const TraceAll = ({
   // 86, 400, 000;
   let allRooms = [];
   let all = [];
+  let allCount = [];
+  let uniqueCounts = [];
   let count = [];
   let roomCount = [];
   let uniqueContacts = [];
@@ -60,8 +65,10 @@ const TraceAll = ({
     const lastStamp = limit * 86400000;
     const lastDate = Number(customDate) - Number(lastStamp);
 
-    console.log("Gap " + gap);
-    console.log("Limit " + limit);
+    // console.log("Gap " + gap);
+    // console.log("Limit " + limit);
+    // console.log("Custom " + customDate);
+    // console.log("lastVisit " + lastStamp / 86400000);
 
     loadDates(limit);
     loadLogs(customDate, `${lastDate}`);
@@ -198,14 +205,37 @@ const TraceAll = ({
     return `${time}`;
   };
 
-  const durationFormatter = (start, end) => {
+  const durationFormatter = (start, end, owner, scannedBy) => {
     const duration = Math.floor((Number(end) - Number(start)) / 60000);
     let string = "";
 
     if (duration > 60) {
       return `${Math.floor(duration / 60)} hour(s)`;
     }
+    if (duration > 5) {
+      if (allCount.length === 0) {
+        allCount.push(owner);
+        allCount.push(scannedBy);
+      } else {
+        let ownerExist = false;
+        let scannedByExist = false;
 
+        allCount.forEach((rec) => {
+          if (owner._id === rec._id) {
+            ownerExist = true;
+          }
+          if (scannedBy._id === rec._id) {
+            scannedByExist = true;
+          }
+        });
+        if (!ownerExist) {
+          allCount.push(owner);
+        }
+        if (!scannedByExist) {
+          allCount.push(scannedBy);
+        }
+      }
+    }
     return `${duration} Minutes`;
   };
 
@@ -240,7 +270,7 @@ const TraceAll = ({
         const dateString = JSON.stringify(dates);
         const contactString = JSON.stringify(contacts);
         const allLogs = JSON.stringify(logs);
-        console.log(allLogs);
+        // console.log(allLogs);
         localStorage.setItem("currentAccount", JSON.stringify(current));
         localStorage.setItem("contactString", contactString);
         localStorage.setItem("dateRange", dateString);
@@ -257,6 +287,7 @@ const TraceAll = ({
     const isUpdated = await setAsNotified();
     return isUpdated;
   };
+
   const setAsNotified = async () => {
     const { data } = await axios.post(`${url}/setAsNotified`, {
       report: proofId,
@@ -266,7 +297,7 @@ const TraceAll = ({
   };
 
   const loadNotified = async () => {
-    console.log(proofId);
+    // console.log(proofId);
     const data = await checkNotified();
     setNotified(data);
   };
@@ -285,6 +316,7 @@ const TraceAll = ({
     uniqueContacts.forEach((uc) => {
       array.push(uc.accountScanned);
     });
+
     accountScanners.forEach((ac) => {
       array.push(ac.scannedBy);
     });
@@ -293,55 +325,66 @@ const TraceAll = ({
   };
 
   const notifyContacts = () => {
+    setAllData(allCount);
+    console.log(allCount);
     uniqueDataContacts();
     let allContacts = getAllContacts();
-    if (Object.keys(notified).length > 0) {
-      swal({
-        title: "Notify Status",
-        text:
-          `Contacts are Already Notified On ` +
-          dateFormatter(notified.dateNotified),
-      });
-    } else {
-      if (uniqueContacts.length > 0) {
-        swal({
-          title: "Notify Close Contacts?",
-          text:
-            `This will also mark this case as Traced.` + uniqueContacts.length,
-          buttons: true,
-        }).then((willNotify) => {
-          if (willNotify) {
-            if (notificationSent(allContacts)) {
-              traceUpdated(true);
-              swal("Done", {
-                icon: "success",
-              });
-              contactTraced();
-              isNotified();
-              loadNotified();
-            }
-          }
-        });
-      } else {
-        swal({
-          text: `No close Contacts Found`,
-        });
-      }
-    }
+    console.log(allContacts);
+
+    // if (Object.keys(notified).length > 0) {
+    //   console.log(notified.dateNotified);
+    //   if (notified.dateNotified !== null) {
+    //     swal({
+    //       title: "Notify Status",
+    //       text:
+    //         `Contacts are Already Notified On ` +
+    //         dateFormatter(notified.dateNotified),
+    //     });
+    //   } else {
+    //     if (uniqueContacts.length > 0) {
+    //       // console.log(uniqueContacts);
+    //       swal({
+    //         title: "Notify Close Contacts?",
+    //         text: `This will also mark this case as Traced.`,
+    //         // uniqueContacts.length,
+    //         buttons: true,
+    //       }).then((willNotify) => {
+    //         if (willNotify) {
+    //           if (notificationSent(allContacts)) {
+    //             traceUpdated(true);
+    //             swal("Done", {
+    //               icon: "success",
+    //             });
+    //             contactTraced();
+    //             isNotified();
+    //             loadNotified();
+    //           }
+    //         }
+    //       });
+    //     } else {
+    //       swal({
+    //         text: `No close Contacts Found`,
+    //       });
+    //     }
+    //   }
+    // }
   };
 
-  const notificationSent = async (contacts) => {
-    return await sendNotification(contacts);
-  };
+  // const notificationSent = async (contacts) => {
+  //   return await sendNotification(contacts);
+  // };
 
-  const sendNotification = async (contacts) => {
-    const { data } = await axios.post(`${url}/sendNotification`, {
-      contacts,
-      message,
-    });
+  // const sendNotification = async (contacts) => {
+  //   const { data } = await axios.post(`${url}/sendNotification`, {
+  //     contacts,
+  //     message,
+  //     reportId: proofId,
+  //   });
 
-    return data;
-  };
+  //   return data;
+  // };
+
+  // =======Notified=============
 
   // ====================
   const searchContacts = (list) => {
@@ -505,6 +548,19 @@ const TraceAll = ({
 
   return (
     <div className="trace-all-container ">
+      <ContactList
+        data={allData}
+        api={api}
+        message={message}
+        proofId={proofId}
+      />
+      <NotifiedList
+        data={allData}
+        api={api}
+        message={message}
+        proofId={proofId}
+        notified={notified}
+      />
       {/* ===============Map View Pop=================== */}
       {mapView && (
         <div className="trace-all-map-view rounded-0">
@@ -630,16 +686,37 @@ const TraceAll = ({
             </div>
           </div>
           <div className="trace-all-main-date tam-restrict text-center">
-            <div
-              onClick={() => {
-                notifyContacts();
-                // console.log(uniqueContacts);
-              }}
-              className="s-i-m-date-content"
-            >
-              <i className="far fa-bell text-warning"></i>
-              Notify Close Contacts
-            </div>
+            {Object.keys(notified).length > 0 && (
+              <Fragment>
+                {notified.dateNotified === null ? (
+                  <div
+                    data-toggle="modal"
+                    data-target="#listModal"
+                    onClick={() => {
+                      notifyContacts();
+                      // console.log(uniqueContacts);
+                    }}
+                    className="s-i-m-date-content"
+                  >
+                    <i className="far fa-bell text-warning"></i>
+                    Notify Close Contacts
+                  </div>
+                ) : (
+                  <div
+                    data-toggle="modal"
+                    data-target="#notifiedModal"
+                    onClick={() => {
+                      notifyContacts();
+                      // console.log(uniqueContacts);
+                    }}
+                    className="s-i-m-date-content"
+                  >
+                    <i className="fas fa-check text-warning"></i>
+                    View Notified Contacts
+                  </div>
+                )}
+              </Fragment>
+            )}
           </div>
           <div className="trace-all-main-date tam-report text-center hide-icon">
             <div
@@ -772,7 +849,12 @@ const TraceAll = ({
                                         {r.accountScanned.lastName}
                                       </td>
                                       <td className="interaction-time-duration">
-                                        {durationFormatter(r.start, r.end)}
+                                        {durationFormatter(
+                                          r.start,
+                                          r.end,
+                                          r.accountScanned,
+                                          r.scannedBy
+                                        )}
                                       </td>
                                       <td className="interaction-time-duration">
                                         {timeFormatter(r.start)}

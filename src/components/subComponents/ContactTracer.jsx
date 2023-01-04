@@ -7,6 +7,7 @@ import UntracedTable from "../contactTrace/UntracedTable";
 import NewThreadsTable from "../contactTrace/NewThreadsTable";
 import NewNegativeThreadsTable from "../contactTrace/NewNegativeThreadsTable";
 import NegativeDetails from "../contactTrace/NegativeDetails";
+import Invalid from "../contactTrace/Invalid";
 import axios from "axios";
 
 const ContactTracer = ({ campus, showMsgProof }) => {
@@ -30,6 +31,8 @@ const ContactTracer = ({ campus, showMsgProof }) => {
   const [showUntraced, setShowUntraced] = useState(false);
   const [showNegativeReports, setShowNegativeReports] = useState(false);
   const [showNewNegativeReports, setShowNewNegativeReports] = useState(false);
+  const [invalidReports, setInvalidReports] = useState([]);
+  const [showInvalid, setShowInvalid] = useState(false);
   const [roles, setRoles] = useState([]);
   const [defaultLat, setDefaultLat] = useState(0);
   const [defaultLng, setDefaultLng] = useState(0);
@@ -44,6 +47,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
     loadNotificationMessage();
     loadUntracedCases();
     loadNegativeReports();
+    loadInvalidReports();
   }, [reload]);
 
   const reloader = () => {
@@ -85,6 +89,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
     setShowNegativeReports(false);
     setShowNewNegativeReports(false);
     setViewDetails(false);
+    setShowInvalid(false);
     slider.click();
   };
 
@@ -183,6 +188,21 @@ const ContactTracer = ({ campus, showMsgProof }) => {
     return data;
   };
 
+  //invalid Reports
+  const loadInvalidReports = async () => {
+    const reports = await fetchInvalidReports();
+
+    setInvalidReports(reports);
+  };
+
+  const fetchInvalidReports = async () => {
+    const { data } = await axios.post(`${url}/getInvalidReports`, {
+      campus,
+    });
+
+    return data;
+  };
+
   const dateFormatter = (timeString) => {
     const date = new Date(Number(timeString)).toString().slice(4, 15);
     const time = new Date(Number(timeString)).toLocaleString("en-US", {
@@ -249,7 +269,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
                 <div className="contact-tracer-summary-top">
                   {" "}
                   <div className="contact-tracer-summary-cards">
-                    <div
+                    {/* <div
                       onClick={() => {
                         resetBoard();
                         setShowNewThreads(true);
@@ -262,7 +282,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
                       <div className="contact-tracer-card-label">
                         New Reported Positive
                       </div>
-                    </div>
+                    </div> */}
 
                     <div
                       onClick={() => {
@@ -287,7 +307,21 @@ const ContactTracer = ({ campus, showMsgProof }) => {
                         {allThreads.length}
                       </div>
                       <div className="contact-tracer-card-label">
-                        All Reported Cases
+                        Valid Reported Cases
+                      </div>
+                    </div>
+                    <div
+                      onClick={() => {
+                        resetBoard();
+                        setShowInvalid(true);
+                      }}
+                      className="contact-tracer-card"
+                    >
+                      <div className="contact-tracer-card-counter">
+                        {invalidReports.length}
+                      </div>
+                      <div className="contact-tracer-card-label">
+                        Invalid Cases
                       </div>
                     </div>
                   </div>
@@ -454,6 +488,15 @@ const ContactTracer = ({ campus, showMsgProof }) => {
                 {showUntraced && (
                   <UntracedTable
                     data={allThreads}
+                    showInteractions={showInteractions}
+                    api={api}
+                    roles={roles}
+                    campus={campus}
+                  />
+                )}
+                {showInvalid && (
+                  <Invalid
+                    data={invalidReports}
                     showInteractions={showInteractions}
                     api={api}
                     roles={roles}

@@ -340,7 +340,9 @@ const StudentSignUpForm = ({ vaxStatsList, genderList, campus }) => {
           </form>
         </Fragment>
       ) : (
-        <div className="">Your Link is Invalid or no Longer Valid...</div>
+        <div className="shadow-0">
+          Your Link is Invalid or no Longer Valid...
+        </div>
       )}
     </div>
   );

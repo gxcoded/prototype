@@ -34,7 +34,7 @@
 .proof-section-right-details {
   padding: 1em;
   border-radius: 20px;
-  background: var(--red);
+  background: var(--blue);
   color: white;
   box-shadow: var(--shadowColorLight);
 }
@@ -45,6 +45,13 @@
 .proof-section-text {
   margin-bottom: 0.5em;
   font-weight: 500;
+}
+.proof-section-invalidate {
+  padding: 1em;
+  font-size: 0.8rem;
+  color: white;
+  background: var(--red);
+  margin: 1em 0;
 }
 /* =======Proof End======== */
 .interactions-main {
@@ -166,6 +173,11 @@
   font-size: 0.8rem;
   font-style: italic;
 }
+.day-count-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 /* =====PROOF====== */
 
 .show-proof {
@@ -198,5 +210,10 @@
   }
   .interactions-main-right {
     width: 100%;
+  }
+}
+@media (max-width: 400px) {
+  .day-count-section {
+    flex-direction: column;
   }
 }

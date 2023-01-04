@@ -6,6 +6,8 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const ReportPositive = ({ accountInfo }) => {
+  const [oneWeek] = useState(604800000);
+  const [minDate] = useState(Number(Date.now().toString()) - oneWeek);
   const [url] = useState(process.env.REACT_APP_URL);
   const [file, setFile] = useState("");
   const [adminInfo, setAdminInfo] = useState({});
@@ -25,8 +27,12 @@ const ReportPositive = ({ accountInfo }) => {
   const [defaultDate] = useState(
     new Date().toISOString().toString().slice(0, 10)
   );
+  const [defaultMin] = useState(
+    new Date(minDate).toISOString().toString().slice(0, 10)
+  );
 
   useEffect(() => {
+    console.log(minDate);
     loadAdminInfo();
     loadTestTypes();
   }, []);
@@ -34,7 +40,7 @@ const ReportPositive = ({ accountInfo }) => {
   //load test types
   const loadTestTypes = async () => {
     const types = await fetchTestTypes();
-    console.log(types);
+    // console.log(types);
 
     setTestTypes(types);
   };
@@ -46,7 +52,7 @@ const ReportPositive = ({ accountInfo }) => {
 
   const loadAdminInfo = async () => {
     const info = await fetchAdminInfo();
-    console.log(info);
+    // console.log(info);
     setAdminInfo(info);
   };
 
@@ -163,6 +169,7 @@ const ReportPositive = ({ accountInfo }) => {
                     setMinimumDate(e.target.value);
                   }
                 }}
+                min={defaultMin}
                 max={defaultDate}
                 type="date"
                 className="form-control"

@@ -3,6 +3,7 @@ import "./subCss/RoomList.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { QRCode } from "react-qrcode-logo";
 import Image from "../../assets/images/psuLogo.png";
 import MapContainer from "../map/MapContainer";
@@ -102,8 +103,18 @@ const RoomList = ({ campus }) => {
 
   const downloadRoomQr = async (list) => {
     setValue(list._id);
-    swal(`Download QR-Code for ${list.description} ?`).then((value) => {
-      value && saveCanvas(list.description);
+    Swal.fire({
+      text: "Download Qr Code?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        saveCanvas(list.description);
+      }
     });
   };
 

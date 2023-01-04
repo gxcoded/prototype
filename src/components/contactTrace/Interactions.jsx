@@ -3,6 +3,7 @@ import axios from "axios";
 import ShowInteractions from "./ShowInteractions";
 import TraceAll from "./TraceAll";
 import { useState, useEffect, Fragment } from "react";
+import Swal from "sweetalert2";
 
 const Interactions = ({
   current,
@@ -195,6 +196,40 @@ const Interactions = ({
 
     return Math.floor(total);
   };
+  const markAsInvalid = (id, accountOwner) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This Will be Marked as Invalid!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (isUpdated(id, accountOwner)) {
+          Swal.fire("Done!", "Report Marked is Marked as Invalid", "success");
+          setTimeout(() => {
+            reloader();
+            getValidProof();
+          }, 2000);
+        }
+      }
+    });
+  };
+
+  const isUpdated = async (id, accountOwner) => {
+    const updated = await sendValidUpdate(id, accountOwner);
+    return updated;
+  };
+
+  const sendValidUpdate = async (id, accountOwner) => {
+    const { data } = await axios.post(`${url}/setAsInvalid`, {
+      id,
+      accountOwner,
+    });
+    return data;
+  };
 
   return (
     <div className="interactions-container ">
@@ -247,7 +282,26 @@ const Interactions = ({
                           </div>
                           day(s) ago.
                         </div>
+                        {proof[0].isStillValid && (
+                          <button
+                            onClick={() =>
+                              markAsInvalid(proof[0]._id, proof[0].accountOwner)
+                            }
+                            className="btn-sm btn-custom-red"
+                          >
+                            <i className="fas fa-ban me-2"></i>
+                            Mark As Invalid
+                          </button>
+                        )}
                       </div>
+                      {!proof[0].isStillValid && (
+                        <div className="proof-section-invalidate border">
+                          <div>This Report is Marked as Invalid.</div>
+                          <div className="marked-invalid-date">
+                            {dateFormatter(proof[0].invalidDate)}
+                          </div>
+                        </div>
+                      )}
                       <div className="proof-section-details">
                         <div className="proof-section-details-left">
                           <img
@@ -291,110 +345,114 @@ const Interactions = ({
                   </div>
                 )}
               </div>
-              <div className="interactions-main">
-                <div className="interactions-main-left">
-                  <div className="interactions-main-left-card">
-                    <div className="current-img-container">
-                      <img
-                        src={`${api}/${current.image}`}
-                        // src={require(`../../../../server/uploads/${current.image}`)}
-                        alt={current._id}
-                        className="interactions-current-img"
-                      />
-                    </div>
-                    <div className="current-info current-info-name">
-                      {current.firstName} {current.lastName}
-                    </div>
-                    <div className="current-info current-info-role">
-                      {current.role.description}
-                    </div>
-                    <div className="current-info current-info-username">
-                      {current.username}
-                    </div>
-                    <div className="notify-btn mt-3">
-                      <button
-                        onClick={() => toggleTrace()}
-                        className="btn btn-custom-red"
-                      >
-                        <i className="me-2 far fa-envelope"></i>Trace All
-                        Interactions
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="interactions-main-right">
-                  <div className="interactions-main-right-header">
-                    <div className="interaction-range">
-                      <span>Showing Rooms Visited in last</span>
-                      <div className="range-control">
-                        <div
-                          onClick={() => {
-                            if (days > 1) {
-                              setDays(days - 1);
-                              updateRange(days - 1);
-                            }
-                          }}
-                          className="decrease"
-                        >
-                          <i className="fas fa-chevron-down"></i>
-                        </div>
-                        <div className="range-display">{days}</div>
-                        <div
-                          onClick={() => {
-                            if (days < 14) {
-                              setDays(days + 1);
-                              updateRange(days + 1);
-                            }
-                          }}
-                          className="increase"
-                        >
-                          <i className="fas fa-chevron-up"></i>
-                        </div>
+              {proof.length > 0 && proof[0].isStillValid && (
+                <div className="interactions-main">
+                  <div className="interactions-main-left">
+                    <div className="interactions-main-left-card">
+                      <div className="current-img-container">
+                        <img
+                          src={`${api}/${current.image}`}
+                          // src={require(`../../../../server/uploads/${current.image}`)}
+                          alt={current._id}
+                          className="interactions-current-img"
+                        />
                       </div>
-                      <span>Day(s)</span>
+                      <div className="current-info current-info-name">
+                        {current.firstName} {current.lastName}
+                      </div>
+                      <div className="current-info current-info-role">
+                        {current.role.description}
+                      </div>
+                      <div className="current-info current-info-username">
+                        {current.username}
+                      </div>
+                      <div className="notify-btn mt-3">
+                        <button
+                          onClick={() => toggleTrace()}
+                          className="btn btn-custom-red"
+                        >
+                          <i className="me-2 far fa-envelope"></i>Trace All
+                          Interactions
+                        </button>
+                      </div>
                     </div>
-                    <div className="interaction-starting-date">
-                      <span>Starting Date</span>
-                      <input
-                        value={customDate}
-                        onChange={(e) => {
-                          {
-                            new Date(customDate).getTime();
-                            // customStartDate(e.target.value);
-                            setCustomStart(new Date(e.target.value).getTime());
-                            // console.log(e.target.value);
-                            setCustomDate(e.target.value);
-                            updateDates(
-                              Number(new Date(e.target.value).getTime())
-                            );
-                          }
-                        }}
-                        max={defaultDate}
-                        type="date"
-                        className="form-control"
-                      />
-                    </div>
-                    <hr />
                   </div>
-                  <div className="date-grid">
-                    {dates.map((d) => (
-                      <div
-                        onClick={() => viewInteractions(d.numeric)}
-                        className="date-box  border"
-                        key={Math.floor(Math.random() * 1000000)}
-                      >
-                        <div className="date-content-date"> {d.string}</div>
-                        <div className="date-content-visited">
-                          <div className="visited-total">
-                            {checkVisited(d.numeric)}
+                  <div className="interactions-main-right">
+                    <div className="interactions-main-right-header">
+                      <div className="interaction-range">
+                        <span>Showing Rooms Visited in last</span>
+                        <div className="range-control">
+                          <div
+                            onClick={() => {
+                              if (days > 1) {
+                                setDays(days - 1);
+                                updateRange(days - 1);
+                              }
+                            }}
+                            className="decrease"
+                          >
+                            <i className="fas fa-chevron-down"></i>
                           </div>
-                          <div className="visited-text">Visits</div>
+                          <div className="range-display">{days}</div>
+                          <div
+                            onClick={() => {
+                              if (days < 14) {
+                                setDays(days + 1);
+                                updateRange(days + 1);
+                              }
+                            }}
+                            className="increase"
+                          >
+                            <i className="fas fa-chevron-up"></i>
+                          </div>
                         </div>
+                        <span>Day(s)</span>
                       </div>
-                    ))}
+                      <div className="interaction-starting-date">
+                        <span>Starting Date</span>
+                        <input
+                          value={customDate}
+                          onChange={(e) => {
+                            {
+                              new Date(customDate).getTime();
+                              // customStartDate(e.target.value);
+                              setCustomStart(
+                                new Date(e.target.value).getTime()
+                              );
+                              // console.log(e.target.value);
+                              setCustomDate(e.target.value);
+                              updateDates(
+                                Number(new Date(e.target.value).getTime())
+                              );
+                            }
+                          }}
+                          max={defaultDate}
+                          type="date"
+                          className="form-control"
+                        />
+                      </div>
+                      <hr />
+                    </div>
+                    <div className="date-grid">
+                      {dates.map((d) => (
+                        <div
+                          // onClick={() => {viewInteractions(d.numeric)}}
+                          className="date-box  border"
+                          key={Math.floor(Math.random() * 1000000)}
+                        >
+                          <div className="date-content-date"> {d.string}</div>
+                          <div className="date-content-visited">
+                            <div className="visited-total">
+                              {checkVisited(d.numeric)}
+                            </div>
+                            <div className="visited-text">Visits</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </Fragment>
           )}
         </Fragment>
