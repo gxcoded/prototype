@@ -1,4 +1,10 @@
-const Table = ({ data, showInteractions, api, showMsgProof }) => {
+const Table = ({
+  data,
+  showInteractions,
+  api,
+  showMsgProof,
+  manualInfoSetter,
+}) => {
   return (
     <table className="campus-table table table-striped">
       <thead>
@@ -22,7 +28,7 @@ const Table = ({ data, showInteractions, api, showMsgProof }) => {
             Address
           </th>
           <th className="fw-bold text-center" scope="col">
-            <i className="ms-2 fas fas fa-tools"></i>
+            Create Report
           </th>
         </tr>
       </thead>
@@ -46,10 +52,21 @@ const Table = ({ data, showInteractions, api, showMsgProof }) => {
             <td>{list.address}</td>
             <td className="text-center">
               <button
-                onClick={() => showInteractions(list)}
-                className="btn btn-primary"
+                data-toggle="modal"
+                data-target="#manualPositive"
+                onClick={() => manualInfoSetter(list)}
+                className="btn-sm btn-custom-red"
               >
-                Trace Contacts
+                Positive
+              </button>
+              <button
+                // onClick={() => showInteractions(list)}
+                data-toggle="modal"
+                data-target="#manualNegative"
+                onClick={() => manualInfoSetter(list)}
+                className="btn-sm btn-success"
+              >
+                Negative
               </button>
             </td>
           </tr>

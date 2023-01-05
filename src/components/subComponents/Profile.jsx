@@ -37,37 +37,41 @@ const Profile = ({ accountInfo, vaxStatsList, genderList, type }) => {
     });
     return await response.data;
   };
+
   const formSubmit = async (e) => {
     e.preventDefault();
-
-    const postRequest = await axios.post(`${url}/updateAccountInfo`, {
-      id: accountInfo._id,
-      course,
-      firstName,
-      lastName,
-      gender,
-      vaxStats,
-      phoneNumber,
-      email,
-      address,
-    });
-    const isUpdated = await postRequest.data;
-    if (isUpdated) {
-      swal({
-        title: "Updated",
-        text: "Information Successfully Updated",
-        icon: "success",
-      }).then((r) => {
-        window.location.reload();
+    if (phoneNumber.charAt(0) === "9" && phoneNumber.length === 10) {
+      const postRequest = await axios.post(`${url}/updateAccountInfo`, {
+        id: accountInfo._id,
+        course,
+        firstName,
+        lastName,
+        gender,
+        vaxStats,
+        phoneNumber,
+        email,
+        address,
       });
+      const isUpdated = await postRequest.data;
+      if (isUpdated) {
+        swal({
+          title: "Updated",
+          text: "Information Successfully Updated",
+          icon: "success",
+        }).then((r) => {
+          window.location.reload();
+        });
+      } else {
+        swal({
+          title: "Unable to update",
+          text: "Please try Again",
+          icon: "error",
+        });
+      }
+      setEditable(false);
     } else {
-      swal({
-        title: "Unable to update",
-        text: "Please try Again",
-        icon: "error",
-      });
+      swal("Phone Number should be 10 digits and starts with 9");
     }
-    setEditable(false);
   };
 
   const loadLastLog = async () => {

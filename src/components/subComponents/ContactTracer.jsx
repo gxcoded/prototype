@@ -8,6 +8,8 @@ import NewThreadsTable from "../contactTrace/NewThreadsTable";
 import NewNegativeThreadsTable from "../contactTrace/NewNegativeThreadsTable";
 import NegativeDetails from "../contactTrace/NegativeDetails";
 import Invalid from "../contactTrace/Invalid";
+import ManualPositive from "../modals/ManualPositive";
+import ManualNegative from "../modals/ManualNegative";
 import axios from "axios";
 
 const ContactTracer = ({ campus, showMsgProof }) => {
@@ -39,6 +41,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
   const slider = document.querySelector("#slider");
   const [reload, setReload] = useState(false);
   const [currentProofId, setCurrentProofId] = useState("");
+  const [manualInfo, setManualInfo] = useState({});
 
   useEffect(() => {
     loadMessages();
@@ -52,6 +55,8 @@ const ContactTracer = ({ campus, showMsgProof }) => {
 
   const reloader = () => {
     setReload(!reload);
+    setSearchResult([]);
+    setText("");
     console.log("reloaded");
   };
   const loadUntracedCases = async () => {
@@ -239,8 +244,15 @@ const ContactTracer = ({ campus, showMsgProof }) => {
     return data;
   };
 
+  const manualInfoSetter = (info) => {
+    console.log(info);
+    setManualInfo(info);
+  };
+
   return (
     <div className="tracer-wrap">
+      <ManualPositive manualInfo={manualInfo} reloader={reloader} />
+      <ManualNegative manualInfo={manualInfo} reloader={reloader} />
       <div className="tracer-form-title">
         <i className="me-2 fas fa-street-view"></i>Contact Tracer
       </div>
@@ -466,6 +478,7 @@ const ContactTracer = ({ campus, showMsgProof }) => {
                         data={searchResult}
                         showInteractions={showInteractions}
                         api={api}
+                        manualInfoSetter={manualInfoSetter}
                       />
                     ) : (
                       <div className="trace-result-stats text-muted bg-light">

@@ -50,6 +50,7 @@ const TraceAll = ({
   let accountScanners = [];
 
   useEffect(() => {
+    // console.log(contacts);
     contactTraced();
     loadNotified();
     isAllowed(current._id);
@@ -251,7 +252,7 @@ const TraceAll = ({
       starting: start,
       ending: end,
     });
-    // console.log(data);
+    console.log(data);
     return data;
   };
 

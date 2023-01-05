@@ -100,7 +100,13 @@ const ContactTracingReport = () => {
   window.onafterprint = () => {
     setPreview(true);
   };
-
+  const encrypt = (str) => {
+    let myStr = str.charAt(0);
+    for (let i = 0; i < str.length - 1; i++) {
+      myStr += "*";
+    }
+    return myStr;
+  };
   return (
     <div className="contact-tracing-report-container">
       {/* <div className={`attendance-report-main ${preview && "page-preview"}`}> */}
@@ -136,7 +142,8 @@ const ContactTracingReport = () => {
               <div className="report-header-detail">
                 <div className="report-left">Name:</div>
                 <div className="report-right">
-                  {currentAccount.lastName}, {currentAccount.firstName}
+                  {encrypt(currentAccount.lastName)},{" "}
+                  {encrypt(currentAccount.firstName)}
                 </div>
               </div>
               <div className="report-header-detail">
@@ -163,7 +170,10 @@ const ContactTracingReport = () => {
               </div>
             </div>
             {dates.map((date) => (
-              <div className="attendance-report-table border">
+              <div
+                key={date.numeric}
+                className="attendance-report-table border"
+              >
                 <div className="attendance-report-table-header bg-light text-dark">
                   <div className="report-table-date">{date.string}</div>
                   <div className="report-table-start"></div>

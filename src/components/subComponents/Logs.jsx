@@ -39,7 +39,10 @@ const Logs = ({
   const compute = (value) => {
     const now = Number(Date.now());
     const val = Number(value);
-    const rem = Math.floor((now - val) / 60000);
+    let rem = Math.floor((now - val) / 60000);
+    if (rem < 0) {
+      rem = 0;
+    }
 
     if (rem >= 60) {
       return `${Math.floor(rem / 60)} Hr.`;

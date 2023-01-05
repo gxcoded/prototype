@@ -64,33 +64,37 @@ const StaffProfile = ({ accountDetails, reloadPage }) => {
 
   const submitUpdate = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post(`${url}/updateStaffInfo`, {
-      id: accountDetails._id,
-      firstName,
-      lastName,
-      address,
-      phoneNumber,
-      email,
-      gender,
-      department,
-      office,
-      vaxStatus,
-    });
-    if (data) {
-      swal({
-        title: "Updated",
-        text: "Information Successfully Updated",
-        icon: "success",
+    if (phoneNumber.charAt(0) === "9" && phoneNumber.length === 10) {
+      const { data } = await axios.post(`${url}/updateStaffInfo`, {
+        id: accountDetails._id,
+        firstName,
+        lastName,
+        address,
+        phoneNumber,
+        email,
+        gender,
+        department,
+        office,
+        vaxStatus,
       });
+      if (data) {
+        swal({
+          title: "Updated",
+          text: "Information Successfully Updated",
+          icon: "success",
+        });
+      } else {
+        swal({
+          title: "Unable to update",
+          text: "Please try Again",
+          icon: "error",
+        });
+      }
+      setEditable(false);
+      reloadPage();
     } else {
-      swal({
-        title: "Unable to update",
-        text: "Please try Again",
-        icon: "error",
-      });
+      swal("Phone Number should be 10 digits and starts with 9");
     }
-    setEditable(false);
-    reloadPage();
   };
 
   return (

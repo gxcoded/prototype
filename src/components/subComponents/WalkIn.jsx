@@ -192,7 +192,7 @@ const WalkIn = ({ accountInfo }) => {
                 <img
                   src={Image}
                   id="walkInPicPreview"
-                  onClick={() => toggleCamera()}
+                  // onClick={() => previewImage(e)}
                   className="walk-in-preview-img"
                   alt="img"
                 />

@@ -10,13 +10,45 @@ import swal from "sweetalert";
 const Verification = () => {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(true);
+  const [resend, setResend] = useState(false);
+  let limit = 60;
+  const [info, setInfo] = useState([]);
+  const [counter, setCounter] = useState(limit);
   const [url] = useState(process.env.REACT_APP_URL);
 
   useEffect(() => {
+    const token = localStorage.getItem("ctToken");
+    loadDetails(token);
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+
+    setInterval(() => {
+      limit !== 0 ? setCounter(limit--) : setCounter(0);
+    }, 1000);
   }, []);
+
+  const resendCode = async () => {
+    const okay = await resent();
+    if (okay) {
+      swal({
+        title: "Success",
+        text: "Verification Code was Resent!",
+        icon: "success",
+      }).then((event) => {
+        window.location.reload();
+      });
+    }
+  };
+
+  const resent = async () => {
+    const { data } = await axios.post(`${url}/resendCode`, {
+      code: info[0].verificationCode,
+      phoneNumber: info[0].phoneNumber,
+    });
+
+    return data;
+  };
 
   const submitCode = async () => {
     const hash = localStorage.getItem("ctToken");
@@ -25,6 +57,18 @@ const Verification = () => {
       code,
     });
     return await response.data;
+  };
+
+  const loadDetails = async (token) => {
+    const details = await fetchDetails(token);
+    setInfo(details);
+  };
+  const fetchDetails = async (token) => {
+    const { data } = await axios.post(`${url}/getTempDetails`, {
+      tempId: token,
+    });
+    console.log(data);
+    return data;
   };
 
   const submitVerification = async (e) => {
@@ -74,6 +118,22 @@ const Verification = () => {
                       placeholder="******"
                     />
                   </div>
+                  <div
+                    className="resend-section fw-normal my-4"
+                    style={{ fontSize: ".9rem" }}
+                  >
+                    {counter > 0 ? (
+                      <div>{`You can resend code in ${counter}`}</div>
+                    ) : (
+                      <div
+                        className="pointer text-primary fw-bold"
+                        onClick={() => resendCode()}
+                      >
+                        Resend Code<i className="ms-2 far fa-paper-plane"></i>
+                      </div>
+                    )}
+                  </div>
+
                   <div className="form-group mt-3">
                     {/* <Link to='/create-password'> */}
                     <button
@@ -85,11 +145,13 @@ const Verification = () => {
                     {/* </Link> */}
                   </div>
                 </form>
+
                 <div className="verify-texts mt-3">
                   We sent a 6 digit verification code on the mobile number you
                   provided. Please enter the code here to continue your
                   registration.
                 </div>
+
                 <div className="back-btn-section verify-bck-btn">
                   <p>
                     <Link to="/signOptions">

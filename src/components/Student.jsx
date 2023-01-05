@@ -37,6 +37,7 @@ const Student = ({ vaxStatsList, genderList }) => {
   const [newNotificationCounter, setNewNotificationCounter] = useState(0);
   const [showNotice, setShowNotice] = useState(false);
   const [showPopModal, setShowPopModal] = useState(false);
+  const [shown, setShown] = useState(true);
 
   useEffect(() => {
     localStorage.getItem("ctIdToken") !== null && setLoggedIn(true);
@@ -49,6 +50,7 @@ const Student = ({ vaxStatsList, genderList }) => {
 
   const fetchInfo = async () => {
     const info = await getInfo();
+    setShown(info.allowed);
     console.log(info);
     setAccountInfo(info);
     isAllowed(info._id);
@@ -295,18 +297,20 @@ const Student = ({ vaxStatsList, genderList }) => {
                         I'm Covid Positive
                       </div>
                     </li>
-                    <li className="list-group-item px-4 border-0">
-                      <div
-                        onClick={(e) => {
-                          toggleActive(e);
-                          setNegative(true);
-                        }}
-                        className="side-button"
-                      >
-                        <i className="text-success fas fa-hand-holding-heart me-3"></i>
-                        Negative Test Result
-                      </div>
-                    </li>
+                    {!shown && (
+                      <li className="list-group-item px-4 border-0">
+                        <div
+                          onClick={(e) => {
+                            toggleActive(e);
+                            setNegative(true);
+                          }}
+                          className="side-button"
+                        >
+                          <i className="text-success fas fa-hand-holding-heart me-3"></i>
+                          Negative Test Result
+                        </div>
+                      </li>
+                    )}
                   </ul>
                 </div>
                 <div className="links-bottom mt-5">
